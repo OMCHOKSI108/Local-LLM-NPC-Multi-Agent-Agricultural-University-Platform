@@ -1,45 +1,22 @@
-# Local LLM NPC Agricultural University Platform
+# Local LLM NPC Agricultural Platform
 
-A Godot-based agricultural education platform featuring AI-powered NPCs for interactive learning experiences.
+Minimal Godot-based agricultural education platform.
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- Godot 4.4.1
-- .NET SDK 8.0+
-
-### Build & Run
 ```bash
-# Quick development build
+# Build and run
 .\quick_build.bat
-
-# Create release package
-.\package_release.bat
 ```
 
-### Project Structure
-```
-├── ASSETS/          # Game assets and scenes
-├── SCRIPTS/         # C# source code
-├── project.godot    # Godot project file
-├── quick_build.bat  # Development build script
-└── package_release.bat  # Release packaging script
-```
+## 📋 Core Files
+- `ASSETS/` - Game assets
+- `project.godot` - Godot project
+- `*.cs` - C# scripts  
+- `quick_build.bat` - Build script
 
-## 📋 Features
-- Interactive agricultural specialist NPCs
-- Educational assessment system
-- Modern UI with enhanced user experience
-- Multi-platform support (Windows, Linux)
-
-## 📖 Documentation
-Full documentation and guides are available in the `PROJECT_DOCS/` directory (excluded from main repo for minimal structure).
-
-## 🎮 Play the Game
-Run the executable from the `BIN/WINDOWS/` directory after building.
-
-## 📄 License
-See LICENSE file for details.
+## 📖 Full Documentation
+See `PROJECT_DOCS/` folder (excluded from repo)
 
 ## Overview
 
