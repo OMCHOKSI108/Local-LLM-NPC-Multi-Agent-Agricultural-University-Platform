@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="None">
+        
+        <link rel="canonical" href="https://github.com/omchoksi108/Local-LLM-NPC-Multi-Agent-Agricultural-University-Platform/">
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>My Docs</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/fontawesome.min.css" rel="stylesheet">
+        <link href="css/brands.min.css" rel="stylesheet">
+        <link href="css/solid.min.css" rel="stylesheet">
+        <link href="css/v4-font-face.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body class="homepage">
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href=".">My Docs</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#local-llm-npc-agricultural-university-platform" class="nav-link">Local LLM NPC: Agricultural University Platform</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#table-of-contents" class="nav-link">Table of Contents</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#project-overview" class="nav-link">Project Overview</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#key-features" class="nav-link">Key Features</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#ai-professors" class="nav-link">AI Professors</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#quick-start" class="nav-link">Quick Start</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#system-requirements" class="nav-link">System Requirements</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#installation" class="nav-link">Installation</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#configuration" class="nav-link">Configuration</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#running-the-platform" class="nav-link">Running the Platform</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#troubleshooting" class="nav-link">Troubleshooting</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#check-for-missing-dependencies" class="nav-link">Check for missing dependencies</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#technical-architecture" class="nav-link">Technical Architecture</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#development-setup" class="nav-link">Development Setup</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#license-credits" class="nav-link">License &amp; Credits</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#conclusion" class="nav-link">Conclusion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#development-setup_1" class="nav-link">Development Setup</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#license-and-credits" class="nav-link">License and Credits</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#support-and-contact" class="nav-link">Support and Contact</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="local-llm-npc-agricultural-university-platform">Local LLM NPC: Agricultural University Platform</h1>
+<p><strong>World's First Multi-Agent AI Educational Platform for Agriculture</strong><br />
+<em>Developed by Om Choksi | 2025</em></p>
+<hr />
+<p><a href="https://godotengine.org/"><img alt="Platform" src="https://img.shields.io/badge/Platform-Godot_4.4.1-blue.svg" /></a>
+<a href="https://dotnet.microsoft.com/"><img alt="Language" src="https://img.shields.io/badge/Language-C%23-.NET_8.0-purple.svg" /></a>
+<a href="https://ollama.ai/"><img alt="AI Engine" src="https://img.shields.io/badge/AI-Ollama_+_Gemma-green.svg" /></a>
+<a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/License-MIT-yellow.svg" /></a></p>
+<hr />
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#-project-overview"> Project Overview</a></li>
+<li><a href="#-key-features"> Key Features</a></li>
+<li><a href="#-ai-professors"> AI Professors</a></li>
+<li><a href="#-quick-start"> Quick Start</a></li>
+<li><a href="#-system-requirements"> System Requirements</a></li>
+<li><a href="#-installation"> Installation</a></li>
+<li><a href="#️-configuration"> Configuration</a></li>
+<li><a href="#-running-the-platform"> Running the Platform</a></li>
+<li><a href="#-demo-video-guide"> Demo Video Guide</a></li>
+<li><a href="#️-troubleshooting"> Troubleshooting</a></li>
+<li><a href="#️-technical-architecture"> Technical Architecture</a></li>
+<li><a href="#-development-setup"> Development Setup</a></li>
+<li><a href="#-license--credits"> License &amp; Credits</a></li>
+</ol>
+<hr />
+<h2 id="project-overview">Project Overview</h2>
+<p><strong>Local LLM NPC Agricultural University</strong> is a groundbreaking educational platform that revolutionizes agricultural learning through artificial intelligence. This innovative system creates the world's first virtual agricultural university, featuring 7 specialized AI professors powered by advanced Gemma language models running completely offline.</p>
+<h3 id="mission-statement">Mission Statement</h3>
+<p><em>"Democratizing agricultural education through AI-powered, multi-agent learning systems that provide personalized, expert-level instruction accessible to everyone, anywhere, anytime."</em></p>
+<h3 id="innovation-highlights">Innovation Highlights</h3>
+<ul>
+<li><strong>World's First</strong> multi-agent agricultural education platform</li>
+<li><strong>100% Offline Operation</strong> - no internet required after setup</li>
+<li><strong>Advanced AI Integration</strong> - Gemma 2 models with specialized agricultural knowledge</li>
+<li><strong>Multi-Specialist Collaboration</strong> - AI professors that work together and cross-reference</li>
+<li><strong>Adaptive Learning</strong> - personalized difficulty and pacing</li>
+<li><strong>Professional Assessment</strong> - comprehensive evaluation and progress tracking</li>
+</ul>
+<hr />
+<h2 id="key-features">Key Features</h2>
+<h3 id="multi-agent-ai-system"><strong>Multi-Agent AI System</strong></h3>
+<ul>
+<li><strong>7 Specialized AI Professors</strong> with domain expertise spanning all agricultural sciences</li>
+<li><strong>Cross-Referral Intelligence</strong> - professors recommend each other based on topic relevance</li>
+<li><strong>Collaborative Problem Solving</strong> - multiple specialists working together on complex issues</li>
+<li><strong>15-30 Years Simulated Experience</strong> - each professor has deep, specialized knowledge</li>
+</ul>
+<h3 id="advanced-learning-analytics"><strong>Advanced Learning Analytics</strong></h3>
+<ul>
+<li><strong>Real-time Progress Tracking</strong> across all agricultural domains</li>
+<li><strong>Competency Mapping</strong> - visual representation of skill development</li>
+<li><strong>Learning Pattern Recognition</strong> - AI adapts to your learning style</li>
+<li><strong>Performance Analytics</strong> - detailed insights into your educational journey</li>
+</ul>
+<h3 id="adaptive-assessment-system"><strong>Adaptive Assessment System</strong></h3>
+<ul>
+<li><strong>Dynamic Difficulty Adjustment</strong> - questions adapt to your skill level</li>
+<li><strong>Multiple Assessment Types</strong> - theoretical, practical, and scenario-based evaluations</li>
+<li><strong>Instant Feedback</strong> - immediate scoring and improvement recommendations</li>
+<li><strong>Certification Ready</strong> - track progress toward agricultural certifications</li>
+</ul>
+<h3 id="privacy-first-design"><strong>Privacy-First Design</strong></h3>
+<ul>
+<li><strong>Complete Offline Operation</strong> - no data transmission to external servers</li>
+<li><strong>Local AI Processing</strong> - all conversations processed on your device</li>
+<li><strong>Secure Learning Environment</strong> - your educational data stays private</li>
+<li><strong>GDPR Compliant</strong> - privacy by design architecture</li>
+</ul>
+<h3 id="natural-language-processing"><strong>Natural Language Processing</strong></h3>
+<ul>
+<li><strong>Human-like Conversations</strong> - natural dialogue with AI professors</li>
+<li><strong>Context Awareness</strong> - professors remember previous conversations</li>
+<li><strong>Multi-language Support</strong> - expandable to multiple languages</li>
+<li><strong>Voice Integration Ready</strong> - prepared for future voice interaction features</li>
+</ul>
+<hr />
+<h2 id="ai-professors">AI Professors</h2>
+<h3 id="dr-terra-firma-soil-science-professor"><strong>Dr. Terra Firma</strong> - <em>Soil Science Professor</em></h3>
+<p><strong>Expertise</strong>: Soil Chemistry, Soil Biology, Nutrition Management<br />
+<strong>Experience</strong>: 20 years in soil science research and education<br />
+<strong>Specializes in</strong>: pH management, nutrient deficiency diagnosis, soil testing, composting integration</p>
+<h3 id="dr-flora-verde-plant-biology-professor"><strong>Dr. Flora Verde</strong> - <em>Plant Biology Professor</em></h3>
+<p><strong>Expertise</strong>: Plant Physiology, Genetics, Crop Science<br />
+<strong>Experience</strong>: 25 years in plant biology and crop development<br />
+<strong>Specializes in</strong>: Plant disease diagnosis, growth optimization, breeding programs, photosynthesis</p>
+<h3 id="hydro-henderson-water-management-consultant"><strong>Hydro Henderson</strong> - <em>Water Management Consultant</em></h3>
+<p><strong>Expertise</strong>: Irrigation Systems, Water Conservation, Hydroponic Systems<br />
+<strong>Experience</strong>: 18 years in agricultural water management<br />
+<strong>Specializes in</strong>: Drip irrigation, water scheduling, drought management, aquaponics</p>
+<h3 id="compost-carl-composting-master"><strong>Compost Carl</strong> - <em>Composting Master</em></h3>
+<p><strong>Expertise</strong>: Organic Waste Management, Soil Amendment, Sustainability<br />
+<strong>Experience</strong>: 15 years in composting and organic farming<br />
+<strong>Specializes in</strong>: Compost recipes, decomposition science, organic certification, waste reduction</p>
+<h3 id="dr-beneficial-betty-ipm-research-specialist"><strong>Dr. Beneficial Betty</strong> - <em>IPM Research Specialist</em></h3>
+<p><strong>Expertise</strong>: Integrated Pest Management, Beneficial Insects, Organic Solutions<br />
+<strong>Experience</strong>: 22 years in entomology and pest management<br />
+<strong>Specializes in</strong>: Biological controls, pest identification, beneficial ecosystems, organic pesticides</p>
+<h3 id="perma-pete-permaculture-design-master"><strong>Perma Pete</strong> - <em>Permaculture Design Master</em></h3>
+<p><strong>Expertise</strong>: Sustainable Design, Ecosystem Management, Regenerative Agriculture<br />
+<strong>Experience</strong>: 30 years in permaculture and sustainable systems<br />
+<strong>Specializes in</strong>: Design principles, food forests, water harvesting, biodiversity enhancement</p>
+<h3 id="professor-green-thumb-general-agriculture-coordinator"><strong>Professor Green Thumb</strong> - <em>General Agriculture Coordinator</em></h3>
+<p><strong>Expertise</strong>: Farm Management, Agricultural Technology, Extension Services<br />
+<strong>Experience</strong>: 28 years in agricultural education and extension<br />
+<strong>Specializes in</strong>: Farm planning, technology integration, crop rotation, business planning</p>
+<hr />
+<h2 id="quick-start">Quick Start</h2>
+<blockquote>
+<p>** Get up and running in under 5 minutes!**</p>
+</blockquote>
+<h3 id="option-1-ready-to-run-executables-recommended"><strong>Option 1: Ready-to-Run Executables</strong> <em>(Recommended)</em></h3>
+<h4 id="for-windows-users">For Windows Users:</h4>
+<pre><code class="language-powershell"># 1. Navigate to Windows binaries
+cd BIN/WINDOWS/
+
+# 2. Run the executable
+./local-llm-npc\ \(4.4\).exe
+</code></pre>
+<h4 id="for-linux-users">For Linux Users:</h4>
+<pre><code class="language-bash"># 1. Navigate to Linux binaries  
+cd BIN/LINUX/
+
+# 2. Make executable and run
+chmod +x local-llm-npc\ \(4.4\).x86_64
+./local-llm-npc\ \(4.4\).x86_64
+</code></pre>
+<h3 id="option-2-development-mode-for-developers"><strong>Option 2: Development Mode</strong> <em>(For Developers)</em></h3>
+<pre><code class="language-bash"># 1. Clone the repository
+git clone https://github.com/omchoksi108/Local-LLM-NPC-Multi-Agent-Agricultural-University-Platform.git
+cd local-llm-npc
+
+# 2. Install dependencies
+dotnet restore
+
+# 3. Open in Godot 4.4.1
+godot4 project.godot
+
+# 4. Press F5 to run
+</code></pre>
+<h3 id="ai-setup-required-for-both-options"><strong>AI Setup</strong> <em>(Required for Both Options)</em></h3>
+<pre><code class="language-bash"># Install Ollama (AI Engine)
+curl -fsSL https://ollama.ai/install.sh | sh  # Linux/macOS
+# Windows: Download from https://ollama.ai/download/windows
+
+# Start Ollama service
+ollama serve
+
+# Install AI models (choose one)
+ollama pull gemma2:2b    # Fast, lightweight (4GB RAM)
+ollama pull gemma2:9b    # Better quality (16GB RAM)
+ollama pull gemma2:27b   # Best quality (32GB RAM)
+</code></pre>
+<h3 id="first-launch-configuration"><strong>First Launch Configuration</strong></h3>
+<ol>
+<li><strong>Launch the platform</strong> using one of the methods above</li>
+<li><strong>Configure Ollama URL</strong>: Set to <code>http://localhost:11434</code></li>
+<li><strong>Select your learning level</strong>: Beginner, Intermediate, or Advanced</li>
+<li><strong>Choose your first professor</strong> and start learning!</li>
+</ol>
+<hr />
+<h2 id="system-requirements">System Requirements</h2>
+<h3 id="minimum-requirements"><strong>Minimum Requirements</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Operating System</strong></td>
+<td>Windows 10/11, Ubuntu 20.04+, macOS 12+</td>
+</tr>
+<tr>
+<td><strong>Memory (RAM)</strong></td>
+<td>8GB (12GB recommended for AI)</td>
+</tr>
+<tr>
+<td><strong>Storage</strong></td>
+<td>5GB free space</td>
+</tr>
+<tr>
+<td><strong>Processor</strong></td>
+<td>Intel i5 / AMD Ryzen 5 (quad-core)</td>
+</tr>
+<tr>
+<td><strong>Graphics</strong></td>
+<td>Integrated graphics sufficient</td>
+</tr>
+<tr>
+<td><strong>Network</strong></td>
+<td>Required only for initial setup</td>
+</tr>
+</tbody>
+</table>
+<h3 id="recommended-specifications"><strong>Recommended Specifications</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Memory (RAM)</strong></td>
+<td>16GB+ for optimal AI performance</td>
+</tr>
+<tr>
+<td><strong>Storage</strong></td>
+<td>SSD with 10GB+ free space</td>
+</tr>
+<tr>
+<td><strong>Processor</strong></td>
+<td>Intel i7/i9 / AMD Ryzen 7/9</td>
+</tr>
+<tr>
+<td><strong>Graphics</strong></td>
+<td>NVIDIA RTX / AMD RDNA2+ (optional)</td>
+</tr>
+<tr>
+<td><strong>AI Models</strong></td>
+<td>Support for 2B-27B parameter models</td>
+</tr>
+</tbody>
+</table>
+<h3 id="supported-ai-models"><strong>Supported AI Models</strong></h3>
+<ul>
+<li><strong>Gemma 2 Series</strong>: 2B, 9B, 27B variants (recommended)</li>
+<li><strong>Llama 3.1</strong>: 8B, 70B variants (alternative)</li>
+<li><strong>Phi-3</strong>: Mini, Small, Medium (lightweight alternative)</li>
+<li><strong>CodeLlama</strong>: 7B, 13B (development support)</li>
+</ul>
+<hr />
+<h2 id="installation">Installation</h2>
+<h3 id="pre-installation-checklist"><strong>Pre-Installation Checklist</strong></h3>
+<ul>
+<li>[ ] Verify system meets minimum requirements</li>
+<li>[ ] Ensure stable internet connection for initial setup</li>
+<li>[ ] Have administrative privileges for software installation</li>
+<li>[ ] Close unnecessary applications to free up memory</li>
+</ul>
+<h3 id="step-1-install-ollama-ai-engine"><strong>Step 1: Install Ollama AI Engine</strong></h3>
+<p>Choose your operating system:</p>
+<h4 id="windows-installation"><strong>Windows Installation</strong></h4>
+<pre><code class="language-powershell"># Option 1: Download installer
+# Visit: https://ollama.ai/download/windows
+
+# Option 2: Use Windows Package Manager
+winget install Ollama.Ollama
+
+# Verify installation
+ollama --version
+</code></pre>
+<h4 id="macos-installation"><strong>macOS Installation</strong></h4>
+<pre><code class="language-bash"># Option 1: Homebrew (recommended)
+brew install ollama
+
+# Option 2: Direct download
+# Visit: https://ollama.ai/download/macos
+
+# Verify installation
+ollama --version
+</code></pre>
+<h4 id="linux-installation"><strong>Linux Installation</strong></h4>
+<pre><code class="language-bash"># Ubuntu/Debian/Most Linux distributions
+curl -fsSL https://ollama.ai/install.sh | sh
+
+# Verify installation
+ollama --version
+</code></pre>
+<h3 id="step-2-install-ai-models"><strong>Step 2: Install AI Models</strong></h3>
+<pre><code class="language-bash"># Start Ollama service (run in background)
+ollama serve &amp;
+
+# Choose and install your preferred model:
+
+#  Fast &amp; Lightweight (4-8GB RAM)
+ollama pull gemma2:2b
+
+#  Balanced Performance (12-16GB RAM) 
+ollama pull gemma2:9b
+
+# Maximum Quality (24-32GB RAM)
+ollama pull gemma2:27b
+
+# Verify models are installed
+ollama list
+</code></pre>
+<h3 id="step-3-install-the-platform"><strong>Step 3: Install the Platform</strong></h3>
+<h4 id="option-a-use-pre-built-executables-fastest"><strong>Option A: Use Pre-built Executables</strong> <em>(Fastest)</em></h4>
+<pre><code class="language-bash"># No additional installation needed!
+# Navigate to your platform's folder:
+
+# Windows Users:
+cd BIN/WINDOWS/
+./local-llm-npc\ \(4.4\).exe
+
+# Linux Users:
+cd BIN/LINUX/
+chmod +x local-llm-npc\ \(4.4\).x86_64
+./local-llm-npc\ \(4.4\).x86_64
+</code></pre>
+<h4 id="option-b-development-setup-for-developers"><strong>Option B: Development Setup</strong> <em>(For Developers)</em></h4>
+<pre><code class="language-bash"># 1. Install prerequisites
+# Download Godot 4.4.1 (Mono/C#): https://godotengine.org/download
+# Install .NET 8.0 SDK: https://dotnet.microsoft.com/download
+
+# 2. Clone repository
+git clone https://github.com/omchoksi108/Local-LLM-NPC-Multi-Agent-Agricultural-University-Platform.git
+cd local-llm-npc
+
+# 3. Restore dependencies
+dotnet restore
+
+# 4. Open in Godot
+godot4 project.godot
+# Press F5 to run
+</code></pre>
+<hr />
+<h2 id="configuration">Configuration</h2>
+<h3 id="ollama-configuration"><strong>Ollama Configuration</strong></h3>
+<h4 id="basic-setup"><strong>Basic Setup</strong></h4>
+<pre><code class="language-bash"># Start Ollama with default settings
+ollama serve
+
+# Your Ollama server will be available at:
+# http://localhost:11434
+</code></pre>
+<h4 id="advanced-configuration"><strong>Advanced Configuration</strong></h4>
+<pre><code class="language-bash"># Custom host and port
+export OLLAMA_HOST=0.0.0.0:11434
+ollama serve
+
+# Enable GPU acceleration (NVIDIA)
+export CUDA_VISIBLE_DEVICES=0
+export OLLAMA_HOST=0.0.0.0:11434
+ollama serve
+
+# Performance tuning for low-memory systems
+export OLLAMA_MAX_LOADED_MODELS=1
+export OLLAMA_MAX_QUEUE=10
+ollama serve
+</code></pre>
+<h3 id="platform-configuration"><strong>Platform Configuration</strong></h3>
+<h4 id="first-launch-setup"><strong>First Launch Setup</strong></h4>
+<ol>
+<li>** Launch the Application**</li>
+<li>Run the executable or start from Godot</li>
+<li>
+<p>Wait for the main menu to appear</p>
+</li>
+<li>
+<p>** Access Settings**</p>
+</li>
+<li>Click the <strong>Settings</strong> gear icon</li>
+<li>
+<p>Or press <code>Ctrl+,</code> (Windows/Linux) or <code>Cmd+,</code> (macOS)</p>
+</li>
+<li>
+<p><strong>Configure AI Connection</strong>
+   <code>Ollama Server URL: http://localhost:11434
+   Default Model: gemma2:2b (or your installed model)
+   Connection Timeout: 30 seconds
+   Max Response Tokens: 1000</code></p>
+</li>
+<li>
+<p><strong>Set Learning Preferences</strong></p>
+</li>
+<li><strong>Difficulty Level</strong>: Beginner, Intermediate, or Advanced</li>
+<li><strong>Learning Goals</strong>: Select your agricultural interests</li>
+<li><strong>Pace</strong>: Casual, Regular, or Intensive learning</li>
+<li><strong>Language</strong>: Currently English (multi-language support planned)</li>
+</ol>
+<h4 id="performance-optimization"><strong>Performance Optimization</strong></h4>
+<p><strong>For Speed (Low-End Systems)</strong></p>
+<pre><code class="language-json">{
+  &quot;ai_settings&quot;: {
+    &quot;model&quot;: &quot;gemma2:2b&quot;,
+    &quot;temperature&quot;: 0.7,
+    &quot;max_tokens&quot;: 600,
+    &quot;timeout&quot;: 20
+  },
+  &quot;ui_settings&quot;: {
+    &quot;animations&quot;: &quot;minimal&quot;,
+    &quot;auto_save&quot;: true,
+    &quot;background_processing&quot;: false
+  }
+}
+</code></pre>
+<p><strong>For Quality (High-End Systems)</strong></p>
+<pre><code class="language-json">{
+  &quot;ai_settings&quot;: {
+    &quot;model&quot;: &quot;gemma2:9b&quot;,
+    &quot;temperature&quot;: 0.5,
+    &quot;max_tokens&quot;: 1500,
+    &quot;timeout&quot;: 45
+  },
+  &quot;ui_settings&quot;: {
+    &quot;animations&quot;: &quot;full&quot;,
+    &quot;auto_save&quot;: true,
+    &quot;background_processing&quot;: true
+  }
+}
+</code></pre>
+<hr />
+<h2 id="running-the-platform">Running the Platform</h2>
+<h3 id="method-1-direct-executable-launch-recommended"><strong>Method 1: Direct Executable Launch</strong> <em>(Recommended)</em></h3>
+<h4 id="pre-launch-checklist"><strong>Pre-Launch Checklist</strong></h4>
+<ul>
+<li>[ ] Ollama service is running (<code>ollama serve</code>)</li>
+<li>[ ] AI models are installed (<code>ollama list</code>)</li>
+<li>[ ] System meets minimum requirements</li>
+<li>[ ] No conflicting applications running on port 11434</li>
+</ul>
+<h4 id="launch-process"><strong>Launch Process</strong></h4>
+<p><strong>Windows Users:</strong></p>
+<pre><code class="language-powershell"># 1. Start Ollama (if not already running)
+ollama serve
+
+# 2. Open new terminal and navigate to project
+cd BIN/WINDOWS/
+
+# 3. Run the executable
+./local-llm-npc\ \(4.4\).exe
+</code></pre>
+<p><strong>Linux Users:</strong></p>
+<pre><code class="language-bash"># 1. Start Ollama (if not already running)
+ollama serve &amp;
+
+# 2. Navigate to Linux binaries
+cd BIN/LINUX/
+
+# 3. Make executable and run
+chmod +x local-llm-npc\ \(4.4\).x86_64
+./local-llm-npc\ \(4.4\).x86_64
+</code></pre>
+<h4 id="first-time-setup-wizard"><strong>First-Time Setup Wizard</strong></h4>
+<ol>
+<li><strong>AI Connection</strong></li>
+<li>Server URL: <code>http://localhost:11434</code></li>
+<li>Test connection ✓</li>
+<li>
+<p>Select default model</p>
+</li>
+<li>
+<p><strong>User Profile</strong></p>
+</li>
+<li>Name and learning goals</li>
+<li>Experience level assessment</li>
+<li>
+<p>Preferred learning pace</p>
+</li>
+<li>
+<p><strong>Learning Path</strong></p>
+</li>
+<li>Choose your first professor</li>
+<li>Set initial learning objectives</li>
+<li>Configure assessment preferences</li>
+</ol>
+<h3 id="method-2-development-mode-for-developers"><strong>Method 2: Development Mode</strong> <em>(For Developers)</em></h3>
+<h4 id="godot-editor-launch"><strong>Godot Editor Launch</strong></h4>
+<pre><code class="language-bash"># 1. Ensure prerequisites are installed
+godot4 --version  # Should show 4.4.1 Mono
+dotnet --version  # Should show 8.0+
+
+# 2. Open project in Godot
+godot4 project.godot
+
+# 3. Verify project configuration
+# Project → Project Settings → Dotnet → Assembly Name: &quot;local-llm-npc&quot;
+
+# 4. Run the project
+# Press F5 or click Play button
+</code></pre>
+<h4 id="command-line-execution"><strong>Command Line Execution</strong></h4>
+<pre><code class="language-bash"># Run specific scene
+godot4 --main-scene res://ASSETS/SCENES/main.tscn
+
+# Debug mode
+godot4 --main-scene res://ASSETS/SCENES/main.tscn --verbose
+
+# Export and run
+godot4 --export-release &quot;Windows Desktop&quot; ./build/game.exe
+</code></pre>
+<h3 id="method-3-custom-build"><strong>Method 3: Custom Build</strong></h3>
+<pre><code class="language-bash"># 1. Clone and prepare
+git clone https://github.com/omchoksi108/Local-LLM-NPC-Multi-Agent-Agricultural-University-Platform.git
+cd local-llm-npc
+
+# 2. Build dependencies
+dotnet restore
+dotnet build --configuration Release
+
+# 3. Run from Godot
+godot4 project.godot
+</code></pre>
+<ol>
+<li><strong>Run the Project</strong></li>
+<li>Press F5 (Run Project)</li>
+<li>Or click the Play button</li>
+<li>Select main scene if prompted</li>
+</ol>
+<h3 id="method-3-command-line-execution">Method 3: Command Line Execution</h3>
+<pre><code class="language-bash"># From project directory
+godot4 --main-scene res://ASSETS/SCENES/main.tscn
+
+# Or export and run
+godot4 --export-release &quot;Windows Desktop&quot; ./build/game.exe
+</code></pre>
+<hr />
+<h3 id="demo-questions-by-specialist">Demo Questions by Specialist</h3>
+<p><strong>Dr. Terra Firma (Soil Science):</strong>
+- "What's the ideal pH for growing blueberries?"
+- "How do I fix nitrogen-deficient soil?"</p>
+<p><strong>Dr. Flora Verde (Plant Biology):</strong>
+- "Why are my tomato leaves turning yellow?"
+- "How does photosynthesis affect plant growth?"</p>
+<p><strong>Hydro Henderson (Water Management):</strong>
+- "Design a drip irrigation system for my vegetable garden"
+- "How much water do potatoes need per week?"</p>
+<hr />
+<h3 id="demo-scenarios-by-professor"><strong>Demo Scenarios by Professor</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Professor</th>
+<th>Demo Question</th>
+<th>Expected Response Highlight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Dr. Terra Firma</strong></td>
+<td>"How do I fix acidic soil for vegetables?"</td>
+<td>pH management + cross-referral to composting</td>
+</tr>
+<tr>
+<td><strong>Dr. Flora Verde</strong></td>
+<td>"Why are my pepper plants flowering but not fruiting?"</td>
+<td>Pollination science + referral to IPM specialist</td>
+</tr>
+<tr>
+<td><strong>Hydro Henderson</strong></td>
+<td>"Design irrigation for my 1000 sq ft garden"</td>
+<td>Customized irrigation plan with calculations</td>
+</tr>
+<tr>
+<td><strong>Dr. Beneficial Betty</strong></td>
+<td>"How do I control aphids organically?"</td>
+<td>IPM strategy + beneficial insect recommendations</td>
+</tr>
+</tbody>
+</table>
+<h3 id="recording-best-practices"><strong>Recording Best Practices</strong></h3>
+<ul>
+<li><strong>Resolution</strong>: 1920x1080 minimum, 4K preferred</li>
+<li><strong>Frame Rate</strong>: 30 FPS for smooth demonstrations</li>
+<li><strong>Audio</strong>: Use external microphone, avoid system audio feedback</li>
+<li><strong>Preparation</strong>: Practice each scenario 2-3 times before recording</li>
+<li><strong>Backup</strong>: Record multiple takes of critical sections</li>
+</ul>
+<hr />
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="common-issues-solutions"><strong>Common Issues &amp; Solutions</strong></h3>
+<h4 id="issue-1-cannot-connect-to-ollama"><strong>Issue 1: Cannot Connect to Ollama</strong></h4>
+<pre><code class="language-bash"># Diagnosis
+ps aux | grep ollama          # Check if Ollama is running
+netstat -an | grep 11434      # Verify port availability
+curl http://localhost:11434/api/version  # Test connection
+
+# Solutions
+ollama serve                  # Start Ollama service
+killall ollama &amp;&amp; ollama serve  # Restart if hung
+systemctl status ollama       # Check service status (Linux)
+</code></pre>
+<h4 id="issue-2-ai-model-not-found"><strong>Issue 2: AI Model Not Found</strong></h4>
+<pre><code class="language-bash"># Diagnosis
+ollama list                   # Show installed models
+ollama show gemma2:2b        # Check specific model details
+
+# Solutions
+ollama pull gemma2:2b        # Install missing model
+ollama pull gemma2:9b        # Install higher quality model
+ollama ps                    # Show currently loaded models
+</code></pre>
+<h4 id="issue-3-slow-ai-responses"><strong>Issue 3: Slow AI Responses</strong></h4>
+<pre><code class="language-bash"># Performance Optimization
+ollama pull gemma2:2b        # Use smaller, faster model
+export OLLAMA_MAX_LOADED_MODELS=1  # Limit memory usage
+export OLLAMA_MAX_QUEUE=5    # Reduce queue size
+
+# System Resource Check
+htop                         # Monitor CPU/RAM usage (Linux/macOS)
+taskmgr                      # Task Manager (Windows)
+nvidia-smi                   # GPU usage (NVIDIA)
+</code></pre>
+<h4 id="issue-4-platform-wont-start"><strong>Issue 4: Platform Won't Start</strong></h4>
+<pre><code class="language-bash"># Dependency Check
+dotnet --version             # Verify .NET 8.0+ installed
+godot4 --version            # Verify Godot 4.4.1
+
+# Project Repair
+cd local-llm-npc
+dotnet clean &amp;&amp; dotnet restore &amp;&amp; dotnet build
+rm -rf .godot &amp;&amp; godot4 project.godot  # Rebuild Godot cache
+</code></pre>
+<h4 id="issue-5-assessment-system-errors"><strong>Issue 5: Assessment System Errors</strong></h4>
+<pre><code class="language-bash"># File Permission Check
+chmod +x BIN/LINUX/local-llm-npc*.x86_64  # Linux permissions
+
+# Asset Verification
+find ASSETS/ -name &quot;*.cs&quot; | wc -l         # Count C# scripts
+find ASSETS/ -name &quot;*.tscn&quot; | wc -l       # Count scene files
+</code></pre>
+<h3 id="performance-optimization_1"><strong>Performance Optimization</strong></h3>
+<h4 id="for-low-end-systems-8gb-ram"><strong>For Low-End Systems (8GB RAM)</strong></h4>
+<pre><code class="language-json">{
+  &quot;recommended_settings&quot;: {
+    &quot;ai_model&quot;: &quot;gemma2:2b&quot;,
+    &quot;max_tokens&quot;: 600,
+    &quot;timeout&quot;: 20,
+    &quot;ui_animations&quot;: &quot;minimal&quot;,
+    &quot;background_processing&quot;: false
+  }
+}
+</code></pre>
+<h4 id="for-high-end-systems-16gb-ram"><strong>For High-End Systems (16GB+ RAM)</strong></h4>
+<pre><code class="language-json">{
+  &quot;optimal_settings&quot;: {
+    &quot;ai_model&quot;: &quot;gemma2:9b&quot;,
+    &quot;max_tokens&quot;: 1500,
+    &quot;timeout&quot;: 45,
+    &quot;ui_animations&quot;: &quot;full&quot;,
+    &quot;background_processing&quot;: true,
+    &quot;concurrent_conversations&quot;: 2
+  }
+}
+</code></pre>
+<h3 id="debug-mode"><strong>Debug Mode</strong></h3>
+<pre><code class="language-bash"># Enable comprehensive logging
+export OLLAMA_DEBUG=1
+export GODOT_DEBUG=1
+
+# Run with detailed output
+./local-llm-npc.exe --verbose --debug
+
+# Check log files
+tail -f ~/.ollama/logs/server.log
+tail -f ~/.local/share/godot/app_userdata/local-llm-npc/logs/
+</code></pre>
+<p>dotnet build</p>
+<h1 id="check-for-missing-dependencies">Check for missing dependencies</h1>
+<p>ldd BIN/LINUX/local-llm-npc*.x86_64  # Linux</p>
+<pre><code>
+#### Issue 5: &quot;Assessment not loading&quot;
+```bash
+# Solution: Check file permissions
+chmod +x BIN/LINUX/local-llm-npc*.x86_64  # Linux
+
+# Verify assessment files exist
+ls ASSETS/SCRIPTS/Global/
+ls ASSETS/PREFABS/BUNDLE/UI/
+</code></pre>
+<h3 id="performance-optimization_2">Performance Optimization</h3>
+<h4 id="for-low-end-systems">For Low-End Systems:</h4>
+<ul>
+<li>Use <code>gemma2:2b</code> model (lighter)</li>
+<li>Reduce max tokens to 500-800</li>
+<li>Disable visual effects in settings</li>
+<li>Close other applications</li>
+</ul>
+<h4 id="for-high-end-systems">For High-End Systems:</h4>
+<ul>
+<li>Use <code>gemma2:9b</code> or <code>gemma2:27b</code> models</li>
+<li>Increase max tokens to 1500-2000</li>
+<li>Enable GPU acceleration for Ollama</li>
+<li>Run multiple concurrent conversations</li>
+</ul>
+<h3 id="debug-mode_1">Debug Mode</h3>
+<p>Enable debug logging for troubleshooting:</p>
+<pre><code class="language-bash"># Set environment variables
+export OLLAMA_DEBUG=1
+export GODOT_DEBUG=1
+
+# Run with verbose output
+./local-llm-npc.exe --verbose --debug
+
+# Check logs
+tail -f ~/.ollama/logs/server.log  # Ollama logs
+tail -f ~/.local/share/godot/app_userdata/local-llm-npc/logs/  # Game logs
+</code></pre>
+<hr />
+<hr />
+<h2 id="technical-architecture">Technical Architecture</h2>
+<h3 id="system-overview"><strong>System Overview</strong></h3>
+<p>Local LLM NPC Agricultural University is built on a robust, modular architecture designed for scalability, performance, and maintainability. The system leverages cutting-edge technologies to deliver an exceptional educational experience.</p>
+<pre><code>┌─────────────────────────────────────────────────────────┐
+│                     PRESENTATION LAYER                 │
+├─────────────────────────────────────────────────────────┤
+│  SpecialistSelector  │  ConversationUI  │  Analytics    │
+│  ProgressDashboard   │  AssessmentUI    │  SettingsUI   │
+├─────────────────────────────────────────────────────────┤
+│                     BUSINESS LOGIC LAYER               │
+├─────────────────────────────────────────────────────────┤
+│  SpecialistManager   │  AssessmentEngine │  Analytics   │
+│  SpecialistNPC       │  ConversationMgr  │  EventSystem │
+│  LearningPathEngine  │  ProgressTracker  │  UserProfile │
+├─────────────────────────────────────────────────────────┤
+│                    DATA ACCESS LAYER                  │
+├─────────────────────────────────────────────────────────┤
+│  OllamaService       │  GameData         │  FileAccess  │
+│  ConfigManager       │  CacheManager     │  StorageAPI  │
+├─────────────────────────────────────────────────────────┤
+│                     AI INTEGRATION LAYER               │
+├─────────────────────────────────────────────────────────┤
+│  Gemma 2 Models      │  Ollama Server    │  JSON Schema │
+│  PromptTemplates     │  ResponseParser   │  ModelRouter │
+└─────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="project-structure"><strong>Project Structure</strong></h3>
+<pre><code>local-llm-npc/
+├──   ASSETS/                     # Game assets and resources
+│   ├── PREFABS/                   # Reusable components
+│   │   ├── BUNDLE/
+│   │   │   ├── ConversationStarter/  # Conversation system
+│   │   │   └── UI/                   # User interface components
+│   │   ├── NPC/                      # AI Professor prefabs
+│   │   ├── player/                   # Player character
+│   │   └── settings/                 # Settings management
+│   ├── SCENES/
+│   │   └── main.tscn                 # Main application scene
+│   ├── SCRIPTS/
+│   │   ├── Global/                   # Global game systems
+│   │   │   ├── GameData.cs           # Game state management
+│   │   │   ├── SpecialistManager.cs  # Multi-agent coordinator
+│   │   │   └── ConversationAnalytics.cs  # Learning analytics
+│   │   ├── UI/                       # User interface scripts
+│   │   │   ├── SpecialistSelector.cs
+│   │   │   ├── ProgressDashboard.cs
+│   │   │   └── AssessmentInterface.cs
+│   │   └── Specialists/              # AI Professor implementations
+│   │       ├── SpecialistNPC.cs      # Base specialist class
+│   │       └── LearningAssessmentSystem.cs
+│   └── TEXTURES/                     # Visual assets
+├──  BIN/                          # Compiled executables
+│   ├── WINDOWS/                      # Windows deployment
+│   └── LINUX/                        # Linux deployment
+├──  Documentation/                 # Project documentation
+│   ├── README.md                     # Project overview
+│   └── USER_GUIDE.md                 # User manual
+├──   Configuration Files
+│   ├── project.godot                 # Godot project settings
+│   ├── local-llm-npc.csproj         # C# project configuration
+│   └── local-llm-npc.sln            # Solution file
+└──  Build Scripts
+    ├── setup.bat                     # Windows setup
+    └── setup.sh                      # Linux setup
+</code></pre>
+<h3 id="key-components">🔧 <strong>Key Components</strong></h3>
+<h4 id="1-multi-agent-ai-system"><strong>1. Multi-Agent AI System</strong></h4>
+<pre><code class="language-csharp">public partial class SpecialistManager : Node
+{
+    public static SpecialistManager Instance { get; private set; }
+
+    // Core functionality
+    public void SwitchToSpecialist(NPCSpecialty specialty);
+    public NPCSpecialty SuggestSpecialistForTopic(string topic);
+    public void HandleCrossReferral(string topic, NPCSpecialty from, NPCSpecialty to);
+
+    // Advanced features
+    public Dictionary&lt;string, float&gt; AnalyzeTopicComplexity(string query);
+    public List&lt;NPCSpecialty&gt; GetCollaborativeSpecialists(string topic);
+}
+</code></pre>
+<h4 id="2-adaptive-assessment-engine"><strong>2. Adaptive Assessment Engine</strong></h4>
+<pre><code class="language-csharp">public partial class LearningAssessmentSystem : Node
+{
+    // Assessment management
+    public AssessmentResult GenerateAdaptiveAssessment(NPCSpecialty specialty, DifficultyLevel level);
+    public void UpdateLearnerProfile(AssessmentResult result);
+    public CompetencyMap GetLearnerCompetencies(string userId);
+
+    // Analytics integration
+    public LearningAnalytics AnalyzeLearningProgress();
+    public PersonalizedRecommendations GenerateRecommendations();
+}
+</code></pre>
+<h4 id="3-conversation-analytics"><strong>3. Conversation Analytics</strong></h4>
+<pre><code class="language-csharp">public partial class ConversationAnalytics : Node
+{
+    // Real-time tracking
+    public void TrackConversationMetrics(ConversationData data);
+    public EngagementScore CalculateEngagement(List&lt;ConversationTurn&gt; turns);
+    public LearningProgress UpdateProgress(string topic, float comprehension);
+
+    // Advanced analytics
+    public HeatMap GenerateTopicHeatMap();
+    public List&lt;LearningInsight&gt; ExtractLearningInsights();
+}
+</code></pre>
+<h3 id="technology-stack"><strong>Technology Stack</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Technology</th>
+<th>Version</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Game Engine</strong></td>
+<td>Godot</td>
+<td>4.4.1</td>
+<td>Core application framework</td>
+</tr>
+<tr>
+<td><strong>Programming</strong></td>
+<td>C#</td>
+<td>.NET 8.0</td>
+<td>Business logic and scripting</td>
+</tr>
+<tr>
+<td><strong>AI Engine</strong></td>
+<td>Ollama</td>
+<td>Latest</td>
+<td>Local AI model serving</td>
+</tr>
+<tr>
+<td><strong>AI Models</strong></td>
+<td>Gemma 2</td>
+<td>2B/9B/27B</td>
+<td>Natural language processing</td>
+</tr>
+<tr>
+<td><strong>Data Format</strong></td>
+<td>JSON</td>
+<td>-</td>
+<td>Configuration and data storage</td>
+</tr>
+<tr>
+<td><strong>Networking</strong></td>
+<td>HTTP REST</td>
+<td>-</td>
+<td>Ollama API communication</td>
+</tr>
+<tr>
+<td><strong>UI Framework</strong></td>
+<td>Godot UI</td>
+<td>4.4.1</td>
+<td>User interface components</td>
+</tr>
+</tbody>
+</table>
+<h3 id="system-workflow"><strong>System Workflow</strong></h3>
+<pre><code class="language-mermaid">graph TD
+    A[User Input] --&gt; B[SpecialistSelector]
+    B --&gt; C[SpecialistManager]
+    C --&gt; D[SpecialistNPC]
+    D --&gt; E[OllamaService]
+    E --&gt; F[Gemma 2 Model]
+    F --&gt; G[Response Processing]
+    G --&gt; H[Cross-Referral Analysis]
+    H --&gt; I[Analytics Update]
+    I --&gt; J[UI Update]
+    J --&gt; K[User Response]
+</code></pre>
+<h3 id="performance-metrics"><strong>Performance Metrics</strong></h3>
+<ul>
+<li><strong>Startup Time</strong>: &lt; 10 seconds (with cached models)</li>
+<li><strong>Response Time</strong>: 2-15 seconds (depending on model size)</li>
+<li><strong>Memory Usage</strong>: 4-32GB (varies by AI model)</li>
+<li><strong>Storage</strong>: 2-15GB (including models)</li>
+<li><strong>Concurrent Users</strong>: Single-user focused design</li>
+<li><strong>Offline Capability</strong>: 100% after initial setup</li>
+</ul>
+<hr />
+<h2 id="development-setup">Development Setup</h2>
+<h3 id="developer-prerequisites"><strong>Developer Prerequisites</strong></h3>
+<h4 id="required-software"><strong>Required Software</strong></h4>
+<pre><code class="language-bash"># Godot 4.4.1 (Mono/C# support)
+wget https://github.com/godotengine/godot/releases/download/4.4.1-stable/Godot_v4.4.1-stable_mono_linux_x86_64.zip
+
+# .NET 8.0 SDK
+curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --version 8.0
+
+# Ollama (AI Engine)
+curl -fsSL https://ollama.ai/install.sh | sh
+</code></pre>
+<h4 id="recommended-development-tools"><strong>Recommended Development Tools</strong></h4>
+<ul>
+<li><strong>Visual Studio Code</strong> with C# extension</li>
+<li><strong>JetBrains Rider</strong> (premium IDE for C#)</li>
+<li><strong>Git</strong> for version control</li>
+<li><strong>Docker</strong> (optional, for containerized AI models)</li>
+</ul>
+<h3 id="development-workflow"><strong>Development Workflow</strong></h3>
+<h4 id="1-initial-setup"><strong>1. Initial Setup</strong></h4>
+<pre><code class="language-bash"># Clone repository
+git clone https://github.com/omchoksi108/Local-LLM-NPC-Multi-Agent-Agricultural-University-Platform.git
+cd local-llm-npc
+
+# Install dependencies
+dotnet restore
+
+# Verify setup
+dotnet build --configuration Debug
+</code></pre>
+<h4 id="2-godot-development"><strong>2. Godot Development</strong></h4>
+<pre><code class="language-bash"># Open project in Godot
+godot4 project.godot
+
+# Build and run (F5)
+# Or use command line:
+godot4 --main-scene res://ASSETS/SCENES/main.tscn
+</code></pre>
+<h4 id="3-ai-development-testing"><strong>3. AI Development &amp; Testing</strong></h4>
+<pre><code class="language-bash"># Start Ollama for development
+ollama serve
+
+# Install development models
+ollama pull gemma2:2b      # Fast development
+ollama pull codellama:7b   # Code assistance
+
+# Test AI integration
+curl -X POST http://localhost:11434/api/generate \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;model&quot;:&quot;gemma2:2b&quot;,&quot;prompt&quot;:&quot;Test agricultural question&quot;}'
+</code></pre>
+<h3 id="testing-quality-assurance"><strong>Testing &amp; Quality Assurance</strong></h3>
+<h4 id="unit-testing"><strong>Unit Testing</strong></h4>
+<pre><code class="language-bash"># Run C# unit tests
+dotnet test
+
+# Run with coverage
+dotnet test --collect:&quot;XPlat Code Coverage&quot;
+</code></pre>
+<h4 id="integration-testing"><strong>Integration Testing</strong></h4>
+<pre><code class="language-bash"># Test Ollama integration
+bash tests/integration/test_ollama_connection.sh
+
+# Test specialist interactions
+bash tests/integration/test_specialist_responses.sh
+</code></pre>
+<h4 id="performance-testing"><strong>Performance Testing</strong></h4>
+<pre><code class="language-bash"># Memory usage profiling
+dotnet run --configuration Release --verbosity diagnostic
+
+# AI response time testing
+python tests/performance/ai_response_benchmark.py
+</code></pre>
+<h3 id="build-deployment"><strong>Build &amp; Deployment</strong></h3>
+<h4 id="export-configuration"><strong>Export Configuration</strong></h4>
+<ol>
+<li><strong>Configure Export Templates</strong></li>
+<li>Download Godot export templates 4.4.1</li>
+<li>
+<p>Configure for target platforms</p>
+</li>
+<li>
+<p><strong>Export Commands</strong></p>
+</li>
+</ol>
+<pre><code class="language-bash"># Windows build
+godot4 --export-release &quot;Windows Desktop&quot; ./build/windows/local-llm-npc.exe
+
+# Linux build  
+godot4 --export-release &quot;Linux/X11&quot; ./build/linux/local-llm-npc.x86_64
+
+# macOS build
+godot4 --export-release &quot;macOS&quot; ./build/macos/local-llm-npc.app
+</code></pre>
+<h4 id="automated-build-pipeline"><strong>Automated Build Pipeline</strong></h4>
+<pre><code class="language-yaml"># .github/workflows/build.yml
+name: Build and Test
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.0.x
+      - name: Build
+        run: dotnet build --configuration Release
+      - name: Test
+        run: dotnet test
+</code></pre>
+<hr />
+<h2 id="license-credits">License &amp; Credits</h2>
+<h3 id="license-information"><strong>License Information</strong></h3>
+<p><strong>License</strong>: MIT License<br />
+<strong>Copyright</strong>: © 2025 Om Choksi<br />
+<strong>Project</strong>: Local LLM NPC Agricultural University Platform</p>
+<pre><code>MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+</code></pre>
+<h3 id="project-creator"><strong>Project Creator</strong></h3>
+<p><strong>Om Choksi</strong><br />
+<em>Lead Developer &amp; Agricultural Education Innovator</em></p>
+<ul>
+<li><strong>Vision</strong>: Democratizing agricultural education through AI</li>
+<li><strong>Innovation</strong>: World's first multi-agent agricultural university</li>
+<li><strong>Expertise</strong>: AI integration, educational technology, sustainable agriculture</li>
+<li><strong>Mission</strong>: Making agricultural knowledge accessible to everyone, everywhere</li>
+</ul>
+<h3 id="acknowledgments"><strong>Acknowledgments</strong></h3>
+<h4 id="technology-partners"><strong>Technology Partners</strong></h4>
+<ul>
+<li><strong><a href="https://godotengine.org/">Godot Engine</a></strong> - Open-source game engine powering our platform</li>
+<li><strong><a href="https://ollama.ai/">Ollama</a></strong> - Local AI model serving infrastructure  </li>
+<li><strong><a href="https://ai.google.dev/gemma">Google Gemma</a></strong> - Advanced language models for natural conversations</li>
+<li><strong><a href="https://dotnetfoundation.org/">.NET Foundation</a></strong> - Robust application framework</li>
+</ul>
+<h4 id="agricultural-research-community"><strong>Agricultural Research Community</strong></h4>
+<ul>
+<li><strong>Agricultural Extension Services</strong> worldwide for domain expertise inspiration</li>
+<li><strong>Sustainable Agriculture Research</strong> communities for best practices</li>
+<li><strong>Educational Technology</strong> researchers for learning science insights</li>
+<li><strong>Open Source Community</strong> for collaborative development principles</li>
+</ul>
+<h4 id="special-thanks"><strong>Special Thanks</strong></h4>
+<ul>
+<li><strong>Early Testers</strong> who provided valuable feedback during development</li>
+<li><strong>Agricultural Experts</strong> who validated our specialist knowledge systems</li>
+<li><strong>Education Professionals</strong> who guided our assessment and analytics design</li>
+<li><strong>Open Source Contributors</strong> who make projects like this possible</li>
+</ul>
+<h3 id="contributing"><strong>Contributing</strong></h3>
+<p>We welcome contributions from the community! Here's how you can help:</p>
+<h4 id="ways-to-contribute"><strong>Ways to Contribute</strong></h4>
+<ul>
+<li><strong>Bug Reports</strong>: Submit issues with detailed reproduction steps</li>
+<li><strong>Feature Requests</strong>: Propose new educational features or improvements</li>
+<li><strong>Code Contributions</strong>: Submit pull requests with enhancements</li>
+<li><strong>Documentation</strong>: Improve guides, tutorials, and technical documentation</li>
+<li><strong>Translations</strong>: Help make the platform accessible in multiple languages</li>
+<li><strong>Testing</strong>: Help test new features and report compatibility issues</li>
+</ul>
+<h4 id="development-guidelines"><strong>Development Guidelines</strong></h4>
+<ol>
+<li><strong>Fork the repository</strong> and create a feature branch</li>
+<li><strong>Follow coding standards</strong> (C# conventions, Godot best practices)</li>
+<li><strong>Write comprehensive tests</strong> for new functionality</li>
+<li><strong>Update documentation</strong> for any user-facing changes</li>
+<li><strong>Submit a pull request</strong> with clear description of changes</li>
+</ol>
+<h3 id="support-contact"><strong>Support &amp; Contact</strong></h3>
+<h4 id="getting-help"><strong>Getting Help</strong></h4>
+<ol>
+<li><strong>Documentation</strong>: Check this guide and USER_GUIDE.md</li>
+<li><strong>Issues</strong>: Use GitHub Issues for bug reports</li>
+<li><strong>Discussions</strong>: Join GitHub Discussions for questions</li>
+<li><strong>Direct Contact</strong>: Create an issue for direct communication</li>
+</ol>
+<h4 id="project-links"><strong>Project Links</strong></h4>
+<ul>
+<li><strong>Homepage</strong>: <a href="https://github.com/OMCHOKSI108/Local-LLM-NPC-Multi-Agent-Agricultural-University-Platform">GitHub Repository</a></li>
+<li><strong>Issues</strong>: <a href="https://github.com/OMCHOKSI108/Local-LLM-NPC-Multi-Agent-Agricultural-University-Platform/issues">Report Bugs &amp; Request Features</a></li>
+<li><strong>Discussions</strong>: <a href="https://github.com/OMCHOKSI108/Local-LLM-NPC-Multi-Agent-Agricultural-University-Platform/discussions">Community Forum</a></li>
+<li><strong>Documentation</strong>: <a href="USER_GUIDE.md">Complete User Guide</a></li>
+</ul>
+<hr />
+<h2 id="conclusion">Conclusion</h2>
+<p><strong>Local LLM NPC Agricultural University</strong> represents a paradigm shift in educational technology, combining the power of artificial intelligence with the accessibility of offline computing. This platform demonstrates that cutting-edge AI education can be privacy-first, locally-run, and universally accessible.</p>
+<h3 id="key-achievements"><strong>Key Achievements</strong></h3>
+<ul>
+<li><strong>World's First</strong> multi-agent agricultural AI university</li>
+<li><strong>100% Offline</strong> operation after initial setup</li>
+<li><strong>7 Specialized AI Professors</strong> with collaborative intelligence</li>
+<li><strong>Advanced Analytics</strong> for personalized learning</li>
+<li><strong>Open Source</strong> and community-driven development</li>
+</ul>
+<h3 id="future-vision"><strong>Future Vision</strong></h3>
+<p>This project lays the foundation for the future of AI-powered education, where:
+- <strong>Knowledge is democratized</strong> and accessible to everyone
+- <strong>AI tutors are specialized</strong> and collaborative
+- <strong>Learning is personalized</strong> and adaptive
+- <strong>Privacy is preserved</strong> through local processing
+- <strong>Education transcends</strong> geographical and economic barriers</p>
+<h3 id="thank-you"><strong>Thank You</strong></h3>
+<p>Thank you for exploring Local LLM NPC Agricultural University. Whether you're an educator, student, developer, or agricultural enthusiast, you're part of a community that believes in the transformative power of accessible, AI-enhanced education.</p>
+<p><strong>Ready to start your agricultural learning journey?</strong> </p>
+<hr />
+<p><em>Developed with  by Om Choksi | Powered by Godot, Ollama &amp; Gemma | © 2025</em>
+│   │       └── AssessmentInterface.cs
+│   └── TEXTURES/
+├── BIN/
+│   ├── WINDOWS/                   # Windows executables
+│   └── LINUX/                     # Linux executables
+├── my-project/
+│   └── docs/
+│       └── index.md              # This documentation
+├── backstories/                   # AI specialist knowledge
+├── README.md                      # Project overview
+├── USER_GUIDE.md                 # User manual
+├── TECHNICAL_DOCUMENTATION.md    # Technical details
+└── project.godot                 # Godot project file</p>
+<pre><code>
+### Key Components
+
+#### 1. SpecialistManager (Core Coordination)
+```csharp
+public partial class SpecialistManager : Node
+{
+    public static SpecialistManager Instance { get; }
+    public void SwitchToSpecialist(NPCSpecialty specialty);
+    public NPCSpecialty SuggestSpecialistForTopic(string topic);
+}
+</code></pre>
+<h4 id="2-multi-agent-ai-system">2. Multi-Agent AI System</h4>
+<ul>
+<li>7 specialized AI professors</li>
+<li>Cross-referral intelligence</li>
+<li>Collaborative problem solving</li>
+<li>Domain-specific expertise</li>
+</ul>
+<h4 id="3-assessment-engine">3. Assessment Engine</h4>
+<ul>
+<li>Adaptive difficulty adjustment</li>
+<li>Multiple question types</li>
+<li>Real-time performance tracking</li>
+<li>Competency mapping</li>
+</ul>
+<h4 id="4-analytics-system">4. Analytics System</h4>
+<ul>
+<li>Learning pattern recognition</li>
+<li>Progress tracking</li>
+<li>Performance analytics</li>
+<li>Personalized recommendations</li>
+</ul>
+<hr />
+<h2 id="development-setup_1">Development Setup</h2>
+<h3 id="prerequisites-for-development">Prerequisites for Development</h3>
+<ol>
+<li><strong>Development Environment</strong>
+   ```bash
+   # Install Godot 4.4.1 (Mono/C#)
+   wget https://downloads.tuxfamily.org/godotengine/4.4.1/mono/</li>
+</ol>
+<p># Install .NET 8.0 SDK
+   curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --version 8.0.0</p>
+<p># Install Visual Studio Code (optional)
+   wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor &gt; packages.microsoft.gpg
+   ```</p>
+<ol>
+<li><strong>AI Development Tools</strong>
+   ```bash
+   # Install Ollama for AI development
+   curl -fsSL https://ollama.ai/install.sh | sh</li>
+</ol>
+<p># Pull development models
+   ollama pull gemma2:2b
+   ollama pull codellama:7b      # For code assistance
+   ```</p>
+<h3 id="building-from-source">Building from Source</h3>
+<ol>
+<li><strong>Clone and Setup</strong>
+   ```bash
+   git clone https://github.com/omchoksi108/Local-LLM-NPC-Multi-Agent-Agricultural-University-Platform.git
+   cd local-llm-npc</li>
+</ol>
+<p># Restore dependencies
+   dotnet restore</p>
+<p># Build project
+   dotnet build --configuration Release
+   ```</p>
+<ol>
+<li><strong>Development Workflow</strong>
+   ```bash
+   # Open in Godot Editor
+   godot4 project.godot</li>
+</ol>
+<p># Or use VS Code with Godot extension
+   code .
+   ```</p>
+<ol>
+<li><strong>Testing</strong>
+   ```bash
+   # Run unit tests
+   dotnet test</li>
+</ol>
+<p># Integration testing with Ollama
+   curl http://localhost:11434/api/generate -d '{"model":"gemma2:2b","prompt":"Test"}'
+   ```</p>
+<h3 id="export-for-distribution">Export for Distribution</h3>
+<ol>
+<li><strong>Configure Export Templates</strong></li>
+<li>Download Godot export templates</li>
+<li>
+<p>Configure for target platforms (Windows/Linux/macOS)</p>
+</li>
+<li>
+<p><strong>Export Commands</strong>
+   ```bash
+   # Export for Windows
+   godot4 --export-release "Windows Desktop" ./build/windows/local-llm-npc.exe</p>
+</li>
+</ol>
+<p># Export for Linux
+   godot4 --export-release "Linux/X11" ./build/linux/local-llm-npc.x86_64</p>
+<p># Export for macOS
+   godot4 --export-release "macOS" ./build/macos/local-llm-npc.app
+   ```</p>
+<hr />
+<h2 id="license-and-credits">License and Credits</h2>
+<p><strong>License</strong>: MIT License<br />
+<strong>Created by</strong>: Om Choksi<br />
+<strong>Project</strong>: Local LLM NPC Agricultural University Platform<br />
+<strong>Technology</strong>: Godot 4.4.1, C#/.NET 8.0, Ollama, Gemma 2 Models</p>
+<h3 id="acknowledgments_1">Acknowledgments</h3>
+<ul>
+<li><strong>Godot Engine</strong> - Open-source game engine</li>
+<li><strong>Ollama</strong> - Local AI model serving</li>
+<li><strong>Google Gemma</strong> - Advanced language models</li>
+<li><strong>Agricultural Research Community</strong> - Domain expertise inspiration</li>
+</ul>
+<hr />
+<h2 id="support-and-contact">Support and Contact</h2>
+<p>For technical support, contributions, or questions:</p>
+<ul>
+<li><strong>Creator</strong>: Om Choksi</li>
+<li><strong>Project Repository</strong>: <a href="https://github.com/omchoksi108/Local-LLM-NPC-Multi-Agent-Agricultural-University-Platform">GitHub - Local LLM NPC</a></li>
+<li><strong>Documentation</strong>: This file and accompanying guides</li>
+<li><strong>Issues</strong>: Use GitHub Issues for bug reports and feature requests</li>
+</ul>
+<h3 id="getting-help_1">Getting Help</h3>
+<ol>
+<li><strong>Check Troubleshooting Section</strong> above</li>
+<li><strong>Review User Guide</strong>: <code>USER_GUIDE.md</code></li>
+<li><strong>Technical Details</strong>: <code>TECHNICAL_DOCUMENTATION.md</code></li>
+<li><strong>Community Support</strong>: GitHub Discussions</li>
+<li><strong>Direct Contact</strong>: Create an issue with detailed information</li>
+</ol>
+<hr />
+<p><strong>Happy Learning!</strong> Welcome to the future of agricultural education with AI-powered, multi-agent learning systems!</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = ".",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="js/base.js"></script>
+        <script src="search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
+
+<!--
+MkDocs version : 1.6.1
+Build Date UTC : 2025-08-06 05:28:13.074728+00:00
+-->
