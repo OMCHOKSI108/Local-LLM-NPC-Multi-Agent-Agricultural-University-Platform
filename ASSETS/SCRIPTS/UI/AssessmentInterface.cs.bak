@@ -1,0 +1,905 @@
+using Godot;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace LocalLLMNPC.UI
+{
+    /// <summary>
+    /// Advanced assessment interface for the Agricultural University Platform.
+    /// Created by Om Choksi to provide comprehensive evaluation and testing capabilities.
+    /// Features adaptive difficulty, multiple question types, and real-time performance analysis.
+    /// </summary>
+    public partial class AssessmentInterface : Control
+    {
+        [Signal]
+        public delegate void AssessmentCompletedEventHandler(string resultData);
+
+        [Signal]
+        public delegate void AssessmentCancelledEventHandler();
+
+        // Assessment State
+        private AssessmentSession currentSession;
+        private int currentQuestionIndex = 0;
+        private DateTime sessionStartTime;
+        private Dictionary<int, string> userAnswers;
+        private Timer questionTimer;
+
+        // UI Components
+        private VBoxContainer mainContainer;
+        private Label assessmentTitle;
+        private ProgressBar assessmentProgress;
+        private Label questionCounter;
+        private Timer timeLeftTimer;
+
+        // Question Display
+        private VBoxContainer questionContainer;
+        private RichTextLabel questionText;
+        private VBoxContainer answersContainer;
+        private ButtonGroup answerButtonGroup;
+        private LineEdit shortAnswerInput;
+        private SpinBox calculationInput;
+        private RichTextLabel caseStudyText;
+
+        // Navigation
+        private HBoxContainer navigationContainer;
+        private Button previousButton;
+        private Button nextButton;
+        private Button submitButton;
+        private Button pauseButton;
+        private Label timeRemainingLabel;
+
+        // Assessment Details Panel
+        private VBoxContainer detailsPanel;
+        private Label difficultyLabel;
+        private Label estimatedTimeLabel;
+        private Label topicsLabel;
+        private ProgressBar confidenceBar;
+
+        // Results Display
+        private Control resultsContainer;
+        private CircularProgressDisplay scoreDisplay;
+        private VBoxContainer performanceBreakdown;
+        private VBoxContainer recommendationsPanel;
+        private Button retryButton;
+        private Button continueButton;
+
+        // Data Sources
+        private LearningAssessmentSystem assessmentSystem;
+        private ConversationAnalytics analytics;
+        private SpecialistManager specialistManager;
+
+        // Assessment Configuration
+        private AssessmentConfig config;
+        private bool isAssessmentActive = false;
+        private bool isPaused = false;
+
+        public override void _Ready()
+        {
+            InitializeDataSources();
+            CreateAssessmentInterface();
+            ConnectSignals();
+
+            userAnswers = new Dictionary<int, string>();
+            answerButtonGroup = new ButtonGroup();
+        }
+
+        private void InitializeDataSources()
+        {
+            assessmentSystem = GetNode<LearningAssessmentSystem>("/root/LearningAssessmentSystem");
+            analytics = GetNode<ConversationAnalytics>("/root/ConversationAnalytics");
+            specialistManager = GetNode<SpecialistManager>("/root/SpecialistManager");
+        }
+
+        private void CreateAssessmentInterface()
+        {
+            SetAnchorsAndOffsetsPreset(Control.Preset.FullRect);
+
+            mainContainer = new VBoxContainer();
+            AddChild(mainContainer);
+
+            CreateAssessmentHeader();
+            CreateQuestionArea();
+            CreateNavigationArea();
+            CreateResultsArea();
+
+            // Initially show only the header
+            questionContainer.Visible = false;
+            navigationContainer.Visible = false;
+            resultsContainer.Visible = false;
+        }
+
+        private void CreateAssessmentHeader()
+        {
+            var headerContainer = new VBoxContainer();
+            headerContainer.CustomMinimumSize = new Vector2(0, 120);
+            mainContainer.AddChild(headerContainer);
+
+            // Title section
+            assessmentTitle = new Label();
+            assessmentTitle.Text = "📝 Agricultural Knowledge Assessment";
+            assessmentTitle.AddThemeStyleboxOverride("normal", CreateHeaderStyle());
+            assessmentTitle.HorizontalAlignment = HorizontalAlignment.Center;
+            headerContainer.AddChild(assessmentTitle);
+
+            // Progress and info bar
+            var infoBar = new HBoxContainer();
+            headerContainer.AddChild(infoBar);
+
+            // Progress section
+            var progressSection = new VBoxContainer();
+            infoBar.AddChild(progressSection);
+
+            questionCounter = new Label();
+            questionCounter.Text = "Question 1 of 15";
+            progressSection.AddChild(questionCounter);
+
+            assessmentProgress = new ProgressBar();
+            assessmentProgress.CustomMinimumSize = new Vector2(400, 25);
+            assessmentProgress.ShowPercentage = true;
+            progressSection.AddChild(assessmentProgress);
+
+            // Time section
+            var timeSection = new VBoxContainer();
+            timeSection.CustomMinimumSize = new Vector2(200, 0);
+            infoBar.AddChild(timeSection);
+
+            timeRemainingLabel = new Label();
+            timeRemainingLabel.Text = "⏱️ Time: 25:00";
+            timeRemainingLabel.HorizontalAlignment = HorizontalAlignment.Center;
+            timeSection.AddChild(timeRemainingLabel);
+
+            pauseButton = new Button();
+            pauseButton.Text = "⏸️ Pause";
+            pauseButton.CustomMinimumSize = new Vector2(100, 30);
+            timeSection.AddChild(pauseButton);
+
+            // Assessment details panel
+            CreateDetailsPanel(infoBar);
+        }
+
+        private void CreateDetailsPanel(HBoxContainer parent)
+        {
+            detailsPanel = new VBoxContainer();
+            detailsPanel.CustomMinimumSize = new Vector2(250, 0);
+            parent.AddChild(detailsPanel);
+
+            var detailsLabel = new Label();
+            detailsLabel.Text = "📊 Assessment Details";
+            detailsLabel.AddThemeStyleboxOverride("normal", CreateSectionStyle());
+            detailsPanel.AddChild(detailsLabel);
+
+            difficultyLabel = new Label();
+            estimatedTimeLabel = new Label();
+            topicsLabel = new Label();
+
+            detailsPanel.AddChild(difficultyLabel);
+            detailsPanel.AddChild(estimatedTimeLabel);
+            detailsPanel.AddChild(topicsLabel);
+
+            // Confidence tracker
+            var confidenceLabel = new Label();
+            confidenceLabel.Text = "🎯 Confidence Level";
+            detailsPanel.AddChild(confidenceLabel);
+
+            confidenceBar = new ProgressBar();
+            confidenceBar.CustomMinimumSize = new Vector2(200, 20);
+            confidenceBar.ShowPercentage = true;
+            detailsPanel.AddChild(confidenceBar);
+        }
+
+        private void CreateQuestionArea()
+        {
+            questionContainer = new VBoxContainer();
+            questionContainer.CustomMinimumSize = new Vector2(0, 400);
+            mainContainer.AddChild(questionContainer);
+
+            // Question text area
+            var questionScrollContainer = new ScrollContainer();
+            questionScrollContainer.CustomMinimumSize = new Vector2(0, 150);
+            questionContainer.AddChild(questionScrollContainer);
+
+            questionText = new RichTextLabel();
+            questionText.BbcodeEnabled = true;
+            questionText.FitContent = true;
+            questionText.CustomMinimumSize = new Vector2(700, 100);
+            questionScrollContainer.AddChild(questionText);
+
+            // Answers area
+            var answersScrollContainer = new ScrollContainer();
+            answersScrollContainer.CustomMinimumSize = new Vector2(0, 250);
+            questionContainer.AddChild(answersScrollContainer);
+
+            answersContainer = new VBoxContainer();
+            answersScrollContainer.AddChild(answersContainer);
+
+            // Input components for different question types
+            CreateInputComponents();
+        }
+
+        private void CreateInputComponents()
+        {
+            // Short answer input
+            shortAnswerInput = new LineEdit();
+            shortAnswerInput.PlaceholderText = "Enter your answer here...";
+            shortAnswerInput.CustomMinimumSize = new Vector2(500, 40);
+            shortAnswerInput.Visible = false;
+            questionContainer.AddChild(shortAnswerInput);
+
+            // Calculation input
+            calculationInput = new SpinBox();
+            calculationInput.CustomMinimumSize = new Vector2(200, 40);
+            calculationInput.Visible = false;
+            questionContainer.AddChild(calculationInput);
+
+            // Case study display
+            caseStudyText = new RichTextLabel();
+            caseStudyText.BbcodeEnabled = true;
+            caseStudyText.CustomMinimumSize = new Vector2(700, 150);
+            caseStudyText.Visible = false;
+            questionContainer.AddChild(caseStudyText);
+        }
+
+        private void CreateNavigationArea()
+        {
+            navigationContainer = new HBoxContainer();
+            navigationContainer.CustomMinimumSize = new Vector2(0, 80);
+            mainContainer.AddChild(navigationContainer);
+
+            // Navigation buttons
+            previousButton = new Button();
+            previousButton.Text = "← Previous";
+            previousButton.CustomMinimumSize = new Vector2(120, 40);
+            previousButton.Disabled = true;
+            navigationContainer.AddChild(previousButton);
+
+            // Center spacer
+            var spacer = new Control();
+            spacer.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+            navigationContainer.AddChild(spacer);
+
+            nextButton = new Button();
+            nextButton.Text = "Next →";
+            nextButton.CustomMinimumSize = new Vector2(120, 40);
+            navigationContainer.AddChild(nextButton);
+
+            submitButton = new Button();
+            submitButton.Text = "🎯 Submit Assessment";
+            submitButton.CustomMinimumSize = new Vector2(180, 40);
+            submitButton.AddThemeStyleboxOverride("normal", CreateSubmitButtonStyle());
+            submitButton.Visible = false;
+            navigationContainer.AddChild(submitButton);
+
+            // Add question review indicator
+            var reviewIndicator = new Label();
+            reviewIndicator.Text = "💡 Tip: Review your answers before submitting";
+            reviewIndicator.HorizontalAlignment = HorizontalAlignment.Center;
+            navigationContainer.AddChild(reviewIndicator);
+        }
+
+        private void CreateResultsArea()
+        {
+            resultsContainer = new Control();
+            resultsContainer.SetAnchorsAndOffsetsPreset(Control.Preset.FullRect);
+            mainContainer.AddChild(resultsContainer);
+
+            var resultsVBox = new VBoxContainer();
+            resultsContainer.AddChild(resultsVBox);
+
+            // Results header
+            var resultsHeader = new Label();
+            resultsHeader.Text = "🎓 Assessment Results";
+            resultsHeader.AddThemeStyleboxOverride("normal", CreateHeaderStyle());
+            resultsHeader.HorizontalAlignment = HorizontalAlignment.Center;
+            resultsVBox.AddChild(resultsHeader);
+
+            // Results content
+            var resultsContent = new HBoxContainer();
+            resultsVBox.AddChild(resultsContent);
+
+            // Score display
+            var scoreSection = new VBoxContainer();
+            scoreSection.CustomMinimumSize = new Vector2(300, 0);
+            resultsContent.AddChild(scoreSection);
+
+            scoreDisplay = new CircularProgressDisplay();
+            scoreDisplay.CustomMinimumSize = new Vector2(200, 200);
+            scoreSection.AddChild(scoreDisplay);
+
+            // Performance breakdown
+            performanceBreakdown = new VBoxContainer();
+            performanceBreakdown.CustomMinimumSize = new Vector2(400, 0);
+            resultsContent.AddChild(performanceBreakdown);
+
+            // Recommendations
+            recommendationsPanel = new VBoxContainer();
+            recommendationsPanel.CustomMinimumSize = new Vector2(300, 0);
+            resultsContent.AddChild(recommendationsPanel);
+
+            // Action buttons
+            var actionButtons = new HBoxContainer();
+            actionButtons.HorizontalAlignment = HorizontalAlignment.Center;
+            resultsVBox.AddChild(actionButtons);
+
+            retryButton = new Button();
+            retryButton.Text = "🔄 Retake Assessment";
+            retryButton.CustomMinimumSize = new Vector2(180, 40);
+            actionButtons.AddChild(retryButton);
+
+            continueButton = new Button();
+            continueButton.Text = "   Continue Learning";
+            continueButton.CustomMinimumSize = new Vector2(180, 40);
+            actionButtons.AddChild(continueButton);
+        }
+
+        private void ConnectSignals()
+        {
+            previousButton.Connect("pressed", new Callable(this, nameof(OnPreviousPressed)));
+            nextButton.Connect("pressed", new Callable(this, nameof(OnNextPressed)));
+            submitButton.Connect("pressed", new Callable(this, nameof(OnSubmitPressed)));
+            pauseButton.Connect("pressed", new Callable(this, nameof(OnPausePressed)));
+            retryButton.Connect("pressed", new Callable(this, nameof(OnRetryPressed)));
+            continueButton.Connect("pressed", new Callable(this, nameof(OnContinuePressed)));
+
+            // Set up timer for time tracking
+            timeLeftTimer = new Timer();
+            timeLeftTimer.WaitTime = 1.0f;
+            timeLeftTimer.Timeout += UpdateTimeDisplay;
+            AddChild(timeLeftTimer);
+        }
+
+        public async Task StartAssessment(NPCSpecialty specialty, AssessmentType type = AssessmentType.Competency)
+        {
+            // Generate assessment session
+            currentSession = await assessmentSystem.GenerateAssessment(specialty, type);
+
+            if (currentSession == null || currentSession.Questions.Count == 0)
+            {
+                ShowError("Failed to generate assessment. Please try again.");
+                return;
+            }
+
+            // Initialize assessment state
+            config = new AssessmentConfig
+            {
+                Specialty = specialty,
+                Type = type,
+                TimeLimit = currentSession.EstimatedDuration,
+                AllowPause = true,
+                ShowProgress = true
+            };
+
+            isAssessmentActive = true;
+            isPaused = false;
+            currentQuestionIndex = 0;
+            sessionStartTime = DateTime.Now;
+            userAnswers.Clear();
+
+            // Update UI
+            UpdateAssessmentHeader();
+            ShowQuestion(currentSession.Questions[0]);
+
+            // Show assessment UI
+            questionContainer.Visible = true;
+            navigationContainer.Visible = true;
+            resultsContainer.Visible = false;
+
+            // Start timer
+            timeLeftTimer.Start();
+
+            // Track assessment start
+            analytics.TrackAssessmentStarted(specialty, type);
+        }
+
+        private void UpdateAssessmentHeader()
+        {
+            assessmentTitle.Text = $"📝 {GetSpecialtyDisplayName(config.Specialty)} Assessment";
+
+            difficultyLabel.Text = $"🎯 Difficulty: {currentSession.Difficulty}";
+            estimatedTimeLabel.Text = $"⏱️ Est. Time: {currentSession.EstimatedDuration.TotalMinutes:F0} minutes";
+            topicsLabel.Text = $"📚 Topics: {string.Join(", ", currentSession.Topics.Take(3))}";
+
+            UpdateProgressDisplay();
+        }
+
+        private void ShowQuestion(AssessmentQuestion question)
+        {
+            // Update question display
+            questionText.Text = $"[b]Question {currentQuestionIndex + 1}[/b]\n\n{question.QuestionText}";
+
+            // Clear previous answers
+            ClearAnswerInputs();
+
+            // Setup answer input based on question type
+            switch (question.Type)
+            {
+                case QuestionType.MultipleChoice:
+                    ShowMultipleChoiceAnswers(question);
+                    break;
+                case QuestionType.TrueFalse:
+                    ShowTrueFalseAnswers(question);
+                    break;
+                case QuestionType.ShortAnswer:
+                    ShowShortAnswerInput(question);
+                    break;
+                case QuestionType.Calculation:
+                    ShowCalculationInput(question);
+                    break;
+                case QuestionType.CaseStudy:
+                    ShowCaseStudyQuestion(question);
+                    break;
+            }
+
+            // Update navigation buttons
+            UpdateNavigationButtons();
+
+            // Load previous answer if exists
+            LoadPreviousAnswer(question);
+        }
+
+        private void ShowMultipleChoiceAnswers(AssessmentQuestion question)
+        {
+            foreach (var option in question.Options)
+            {
+                var optionButton = new CheckBox();
+                optionButton.ButtonGroup = answerButtonGroup;
+                optionButton.Text = option.Text;
+                optionButton.ToggleMode = true;
+                optionButton.Connect("toggled", new Callable(this, nameof(OnAnswerSelected)).Bind(option.Id));
+
+                answersContainer.AddChild(optionButton);
+            }
+        }
+
+        private void ShowTrueFalseAnswers(AssessmentQuestion question)
+        {
+            var trueButton = new CheckBox();
+            trueButton.ButtonGroup = answerButtonGroup;
+            trueButton.Text = "   True";
+            trueButton.ToggleMode = true;
+            trueButton.Connect("toggled", new Callable(this, nameof(OnAnswerSelected)).Bind("true"));
+            answersContainer.AddChild(trueButton);
+
+            var falseButton = new CheckBox();
+            falseButton.ButtonGroup = answerButtonGroup;
+            falseButton.Text = "❌ False";
+            falseButton.ToggleMode = true;
+            falseButton.Connect("toggled", new Callable(this, nameof(OnAnswerSelected)).Bind("false"));
+            answersContainer.AddChild(falseButton);
+        }
+
+        private void ShowShortAnswerInput(AssessmentQuestion question)
+        {
+            shortAnswerInput.Visible = true;
+            shortAnswerInput.PlaceholderText = question.Hint ?? "Enter your answer here...";
+            shortAnswerInput.Connect("text_changed", new Callable(this, nameof(OnShortAnswerChanged)));
+        }
+
+        private void ShowCalculationInput(AssessmentQuestion question)
+        {
+            calculationInput.Visible = true;
+            calculationInput.Suffix = question.Unit ?? "";
+            calculationInput.Step = 0.1;
+            calculationInput.Connect("value_changed", new Callable(this, nameof(OnCalculationChanged)));
+        }
+
+        private void ShowCaseStudyQuestion(AssessmentQuestion question)
+        {
+            caseStudyText.Visible = true;
+            caseStudyText.Text = question.CaseStudyContent;
+
+            // Show follow-up questions
+            ShowMultipleChoiceAnswers(question);
+        }
+
+        private void ClearAnswerInputs()
+        {
+            // Clear answer options
+            foreach (Node child in answersContainer.GetChildren())
+            {
+                child.QueueFree();
+            }
+
+            // Hide input components
+            shortAnswerInput.Visible = false;
+            calculationInput.Visible = false;
+            caseStudyText.Visible = false;
+        }
+
+        private void LoadPreviousAnswer(AssessmentQuestion question)
+        {
+            if (userAnswers.TryGetValue(currentQuestionIndex, out string previousAnswer))
+            {
+                switch (question.Type)
+                {
+                    case QuestionType.ShortAnswer:
+                        shortAnswerInput.Text = previousAnswer;
+                        break;
+                    case QuestionType.Calculation:
+                        if (double.TryParse(previousAnswer, out double value))
+                            calculationInput.Value = value;
+                        break;
+                        // Handle other types as needed
+                }
+            }
+        }
+
+        private void UpdateNavigationButtons()
+        {
+            previousButton.Disabled = currentQuestionIndex == 0;
+            nextButton.Visible = currentQuestionIndex < currentSession.Questions.Count - 1;
+            submitButton.Visible = currentQuestionIndex == currentSession.Questions.Count - 1;
+        }
+
+        private void UpdateProgressDisplay()
+        {
+            var progress = (float)(currentQuestionIndex + 1) / currentSession.Questions.Count * 100;
+            assessmentProgress.Value = progress;
+            questionCounter.Text = $"Question {currentQuestionIndex + 1} of {currentSession.Questions.Count}";
+
+            // Update confidence based on answered questions
+            var answeredCount = userAnswers.Count;
+            var confidenceLevel = (float)answeredCount / currentSession.Questions.Count * 100;
+            confidenceBar.Value = confidenceLevel;
+        }
+
+        private void UpdateTimeDisplay()
+        {
+            if (!isAssessmentActive || isPaused) return;
+
+            var elapsed = DateTime.Now - sessionStartTime;
+            var remaining = config.TimeLimit - elapsed;
+
+            if (remaining.TotalSeconds <= 0)
+            {
+                // Time's up!
+                OnTimeExpired();
+                return;
+            }
+
+            timeRemainingLabel.Text = $"⏱️ Time: {remaining.TotalMinutes:F0}:{remaining.Seconds:D2}";
+
+            // Warning when time is low
+            if (remaining.TotalMinutes < 5)
+            {
+                timeRemainingLabel.Modulate = Colors.Orange;
+            }
+            if (remaining.TotalMinutes < 2)
+            {
+                timeRemainingLabel.Modulate = Colors.Red;
+            }
+        }
+
+        // Event handlers
+        private void OnAnswerSelected(string answerId)
+        {
+            userAnswers[currentQuestionIndex] = answerId;
+            UpdateProgressDisplay();
+        }
+
+        private void OnShortAnswerChanged(string newText)
+        {
+            userAnswers[currentQuestionIndex] = newText;
+            UpdateProgressDisplay();
+        }
+
+        private void OnCalculationChanged(double value)
+        {
+            userAnswers[currentQuestionIndex] = value.ToString();
+            UpdateProgressDisplay();
+        }
+
+        private void OnPreviousPressed()
+        {
+            if (currentQuestionIndex > 0)
+            {
+                currentQuestionIndex--;
+                ShowQuestion(currentSession.Questions[currentQuestionIndex]);
+            }
+        }
+
+        private void OnNextPressed()
+        {
+            if (currentQuestionIndex < currentSession.Questions.Count - 1)
+            {
+                currentQuestionIndex++;
+                ShowQuestion(currentSession.Questions[currentQuestionIndex]);
+            }
+        }
+
+        private async void OnSubmitPressed()
+        {
+            // Confirm submission
+            var confirmDialog = new ConfirmationDialog();
+            confirmDialog.DialogText = "Are you ready to submit your assessment?\nYou won't be able to change your answers after submission.";
+            confirmDialog.Connect("confirmed", new Callable(this, nameof(ConfirmSubmission)));
+            GetTree().Root.AddChild(confirmDialog);
+            confirmDialog.PopupCentered();
+        }
+
+        private async void ConfirmSubmission()
+        {
+            isAssessmentActive = false;
+            timeLeftTimer.Stop();
+
+            // Calculate results
+            var result = await CalculateAssessmentResults();
+
+            // Track completion
+            analytics.TrackAssessmentCompleted(config.Specialty, result);
+
+            // Show results
+            ShowResults(result);
+
+            // Emit completion signal
+            EmitSignal(SignalName.AssessmentCompleted, result);
+        }
+
+        private void OnPausePressed()
+        {
+            if (isPaused)
+            {
+                ResumeAssessment();
+            }
+            else
+            {
+                PauseAssessment();
+            }
+        }
+
+        private void PauseAssessment()
+        {
+            isPaused = true;
+            pauseButton.Text = "▶️ Resume";
+
+            // Hide question content while paused
+            questionContainer.Modulate = new Color(0.5f, 0.5f, 0.5f);
+        }
+
+        private void ResumeAssessment()
+        {
+            isPaused = false;
+            pauseButton.Text = "⏸️ Pause";
+
+            // Show question content
+            questionContainer.Modulate = Colors.White;
+        }
+
+        private void OnTimeExpired()
+        {
+            isAssessmentActive = false;
+            timeLeftTimer.Stop();
+
+            ShowTimeExpiredDialog();
+        }
+
+        private async void ShowTimeExpiredDialog()
+        {
+            var dialog = new AcceptDialog();
+            dialog.DialogText = "⏰ Time's up! Your assessment will be submitted automatically.";
+            dialog.Connect("confirmed", new Callable(this, nameof(ConfirmSubmission)));
+            GetTree().Root.AddChild(dialog);
+            dialog.PopupCentered();
+        }
+
+        private void OnRetryPressed()
+        {
+            // Reset assessment
+            EmitSignal(SignalName.AssessmentCancelled);
+        }
+
+        private void OnContinuePressed()
+        {
+            EmitSignal(SignalName.AssessmentCancelled);
+        }
+
+        private async Task<AssessmentResult> CalculateAssessmentResults()
+        {
+            var duration = DateTime.Now - sessionStartTime;
+            var result = await assessmentSystem.EvaluateAssessment(currentSession, userAnswers, duration);
+
+            return result;
+        }
+
+        private void ShowResults(AssessmentResult result)
+        {
+            // Hide assessment UI
+            questionContainer.Visible = false;
+            navigationContainer.Visible = false;
+
+            // Show results UI
+            resultsContainer.Visible = true;
+
+            // Update score display
+            scoreDisplay.UpdateProgress(result.Score / 100f);
+
+            // Show performance breakdown
+            ShowPerformanceBreakdown(result);
+
+            // Show recommendations
+            ShowRecommendations(result);
+        }
+
+        private void ShowPerformanceBreakdown(AssessmentResult result)
+        {
+            // Clear previous breakdown
+            foreach (Node child in performanceBreakdown.GetChildren())
+            {
+                child.QueueFree();
+            }
+
+            var titleLabel = new Label();
+            titleLabel.Text = "📊 Performance Breakdown";
+            titleLabel.AddThemeStyleboxOverride("normal", CreateSectionStyle());
+            performanceBreakdown.AddChild(titleLabel);
+
+            // Overall score
+            var scoreLabel = new Label();
+            scoreLabel.Text = $"🎯 Overall Score: {result.Score:F1}% ({GetGradeLetter(result.Score)})";
+            performanceBreakdown.AddChild(scoreLabel);
+
+            // Time taken
+            var timeLabel = new Label();
+            timeLabel.Text = $"⏱️ Time Taken: {result.Duration.TotalMinutes:F1} minutes";
+            performanceBreakdown.AddChild(timeLabel);
+
+            // Topic breakdown
+            if (result.TopicScores?.Any() == true)
+            {
+                var topicsLabel = new Label();
+                topicsLabel.Text = "📚 Topic Performance:";
+                performanceBreakdown.AddChild(topicsLabel);
+
+                foreach (var topicScore in result.TopicScores)
+                {
+                    var topicLabel = new Label();
+                    topicLabel.Text = $"  • {topicScore.Key}: {topicScore.Value:F0}%";
+                    performanceBreakdown.AddChild(topicLabel);
+                }
+            }
+
+            // Difficulty analysis
+            var difficultyLabel = new Label();
+            difficultyLabel.Text = $"🎲 Questions Answered: {result.QuestionsAnswered}/{result.TotalQuestions}";
+            performanceBreakdown.AddChild(difficultyLabel);
+        }
+
+        private void ShowRecommendations(AssessmentResult result)
+        {
+            // Clear previous recommendations
+            foreach (Node child in recommendationsPanel.GetChildren())
+            {
+                child.QueueFree();
+            }
+
+            var titleLabel = new Label();
+            titleLabel.Text = "💡 Recommendations";
+            titleLabel.AddThemeStyleboxOverride("normal", CreateSectionStyle());
+            recommendationsPanel.AddChild(titleLabel);
+
+            // Generate personalized recommendations
+            var recommendations = GenerateRecommendations(result);
+
+            foreach (var recommendation in recommendations)
+            {
+                var recLabel = new Label();
+                recLabel.Text = $"• {recommendation}";
+                recLabel.AutowrapMode = TextServer.AutowrapMode.WordSmart;
+                recommendationsPanel.AddChild(recLabel);
+            }
+        }
+
+        private List<string> GenerateRecommendations(AssessmentResult result)
+        {
+            var recommendations = new List<string>();
+
+            if (result.Score >= 90)
+            {
+                recommendations.Add("    Excellent work! Consider taking advanced assessments.");
+                recommendations.Add("🎓 You're ready to help other students with this topic.");
+            }
+            else if (result.Score >= 70)
+            {
+                recommendations.Add("   Good progress! Focus on areas where you scored below 80%.");
+                recommendations.Add("📚 Review the topics you found challenging.");
+            }
+            else if (result.Score >= 50)
+            {
+                recommendations.Add("     Consider reviewing the fundamental concepts.");
+                recommendations.Add("🗣️ Have more conversations with the specialist.");
+                recommendations.Add("🎯 Practice with easier assessments first.");
+            }
+            else
+            {
+                recommendations.Add("🌱 Start with basic concepts and build up gradually.");
+                recommendations.Add("       Spend more time in conversation with the specialist.");
+                recommendations.Add("📚 Use the learning resources provided.");
+            }
+
+            return recommendations;
+        }
+
+        private void ShowError(string message)
+        {
+            var dialog = new AcceptDialog();
+            dialog.DialogText = message;
+            GetTree().Root.AddChild(dialog);
+            dialog.PopupCentered();
+        }
+
+        // Utility methods
+        private string GetSpecialtyDisplayName(NPCSpecialty specialty)
+        {
+            return specialty switch
+            {
+                NPCSpecialty.SoilScience => "Soil Science",
+                NPCSpecialty.PlantBiology => "Plant Biology",
+                NPCSpecialty.WaterManagement => "Water Management",
+                NPCSpecialty.Composting => "Composting",
+                NPCSpecialty.PestManagement => "Pest Management",
+                NPCSpecialty.Permaculture => "Permaculture",
+                NPCSpecialty.GeneralAgriculture => "General Agriculture",
+                _ => specialty.ToString()
+            };
+        }
+
+        private string GetGradeLetter(float score)
+        {
+            return score switch
+            {
+                >= 97 => "A+",
+                >= 93 => "A",
+                >= 90 => "A-",
+                >= 87 => "B+",
+                >= 83 => "B",
+                >= 80 => "B-",
+                >= 77 => "C+",
+                >= 73 => "C",
+                >= 70 => "C-",
+                >= 67 => "D+",
+                >= 65 => "D",
+                _ => "F"
+            };
+        }
+
+        // Style creation methods
+        private StyleBoxFlat CreateHeaderStyle()
+        {
+            var style = new StyleBoxFlat();
+            style.BgColor = new Color(0.2f, 0.4f, 0.6f);
+            style.SetCornerRadiusAll(8);
+            style.SetContentMarginAll(10);
+            return style;
+        }
+
+        private StyleBoxFlat CreateSectionStyle()
+        {
+            var style = new StyleBoxFlat();
+            style.BgColor = new Color(0.15f, 0.15f, 0.15f);
+            style.SetCornerRadiusAll(6);
+            style.SetContentMarginAll(8);
+            return style;
+        }
+
+        private StyleBoxFlat CreateSubmitButtonStyle()
+        {
+            var style = new StyleBoxFlat();
+            style.BgColor = new Color(0.3f, 0.7f, 0.3f);
+            style.SetCornerRadiusAll(5);
+            style.SetContentMarginAll(8);
+            return style;
+        }
+    }
+
+    // Assessment configuration class
+    public class AssessmentConfig
+    {
+        public NPCSpecialty Specialty { get; set; }
+        public AssessmentType Type { get; set; }
+        public TimeSpan TimeLimit { get; set; }
+        public bool AllowPause { get; set; }
+        public bool ShowProgress { get; set; }
+        public DifficultyLevel PreferredDifficulty { get; set; }
+    }
+}
