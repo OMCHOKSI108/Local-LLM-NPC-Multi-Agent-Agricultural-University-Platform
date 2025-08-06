@@ -2,3 +2,61 @@
 .godot/
 /android/
 HOW_TO_RUN.txt
+
+# Documentation and project management files
+PROJECT_DOCS/
+
+# Build outputs and large files
+BIN/
+RELEASES/
+*.exe
+*.pck
+*.dll
+*.so
+*.dylib
+*.tmp
+
+# .NET/Mono build artifacts
+**/bin/
+**/obj/
+**/.vs/
+**/.vscode/
+*.user
+*.suo
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+
+# Documentation build outputs
+docs/site/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*~
+
+# IDE files
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Temporary files
+*.backup
+*.bak
+*~
+
+# Package files (should be in releases)
+*.zip
+*.rar
+*.7z
+*.tar.gz
