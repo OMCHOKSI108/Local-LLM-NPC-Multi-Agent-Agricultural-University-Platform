@@ -53,7 +53,7 @@ setup_ai_models() {
     echo "🤖 Setting up AI models..."
     
     if command_exists ollama; then
-        echo "✅ Ollama is installed"
+        echo "   Ollama is installed"
         
         # Start Ollama service
         echo "Starting Ollama service..."
@@ -65,7 +65,7 @@ setup_ai_models() {
         ollama pull gemma2:2b
         ollama pull gemma2:9b
         
-        echo "✅ AI models installed successfully"
+        echo "   AI models installed successfully"
         ollama list
     else
         echo "❌ Ollama not found. Please install Ollama first."
@@ -78,10 +78,10 @@ build_project() {
     echo "🔨 Building the project..."
     
     if command_exists dotnet; then
-        echo "✅ .NET SDK is installed"
+        echo "   .NET SDK is installed"
         dotnet restore
         dotnet build --configuration Release
-        echo "✅ Project built successfully"
+        echo "   Project built successfully"
     else
         echo "❌ .NET SDK not found. Please install .NET 8.0 SDK first."
         install_dotnet
@@ -93,7 +93,7 @@ run_project() {
     echo "🎮 Running Local LLM NPC..."
     
     if command_exists godot; then
-        echo "✅ Godot is installed"
+        echo "   Godot is installed"
         echo "Starting project..."
         godot --main-scene res://ASSETS/SCENES/main.tscn
     else
@@ -208,31 +208,31 @@ dotnet build
 Your project is now ready for recording a professional demo video!
 EOF
 
-    echo "✅ Created QUICKSTART.md with demo script"
+    echo "   Created QUICKSTART.md with demo script"
 }
 
 # Main setup flow
 main() {
-    echo "🌟 Welcome to Local LLM NPC Setup!"
+    echo "    Welcome to Local LLM NPC Setup!"
     echo ""
     
     # Check current status
-    echo "📋 Checking system requirements..."
+    echo "      Checking system requirements..."
     
     if command_exists ollama; then
-        echo "✅ Ollama: Installed"
+        echo "   Ollama: Installed"
     else
         echo "❌ Ollama: Not installed"
     fi
     
     if command_exists godot; then
-        echo "✅ Godot: Installed"
+        echo "   Godot: Installed"
     else
         echo "❌ Godot: Not installed"
     fi
     
     if command_exists dotnet; then
-        echo "✅ .NET SDK: Installed"
+        echo "   .NET SDK: Installed"
     else
         echo "❌ .NET SDK: Not installed"
     fi
@@ -278,7 +278,7 @@ main() {
             create_quick_start
             echo ""
             echo "🎉 Setup complete! Ready to run your AI Agricultural University!"
-            echo "📖 Check QUICKSTART.md for demo video script"
+            echo "     Check QUICKSTART.md for demo video script"
             ;;
         *)
             echo "Invalid option. Please run the script again."

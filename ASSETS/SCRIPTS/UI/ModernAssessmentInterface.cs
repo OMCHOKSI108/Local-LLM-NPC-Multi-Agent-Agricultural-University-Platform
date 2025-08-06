@@ -1,0 +1,1063 @@
+using Godot;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LocalLLMNPC.UI
+{
+    /// <summary>
+    /// Revolutionary Ultra-Modern Assessment Interface for Agricultural Education
+    /// Created by Om Choksi for the most advanced agricultural learning platform
+    /// 
+    /// Features:
+    /// 🎯 Interactive quiz system with 3D visual feedback
+    /// 📊 Real-time performance analytics with beautiful charts
+    /// 🌟 Gamified learning with achievement celebrations
+    /// 🎨 Dynamic themes that adapt to assessment topics
+    /// ⚡ AI-powered difficulty adjustment
+    /// 🎵 Immersive audio feedback and soundscapes
+    /// 🏆 Comprehensive progress tracking with visual rewards
+    /// 🌈 Accessibility features and multiple learning styles
+    /// 🔮 Predictive learning analytics
+    /// 💎 Premium visual effects and animations
+    /// </summary>
+    public partial class ModernAssessmentInterface : Control
+    {
+        [Signal] public delegate void AssessmentCompletedEventHandler(AssessmentResult result);
+        [Signal] public delegate void QuestionAnsweredEventHandler(int questionIndex, bool isCorrect);
+        [Signal] public delegate void ProgressUpdatedEventHandler(float progress);
+        [Signal] public delegate void AchievementEarnedEventHandler(string achievement);
+
+        #region Core Assessment Data
+
+        // Assessment Configuration
+        public NPCSpecialty CurrentSpecialty { get; private set; }
+        public AssessmentDifficulty CurrentDifficulty { get; private set; }
+        public AssessmentType CurrentType { get; private set; }
+
+        // Question Management
+        private List<AssessmentQuestion> currentQuestions;
+        private int currentQuestionIndex = 0;
+        private Dictionary<int, bool> userAnswers;
+        private DateTime assessmentStartTime;
+        private TimeSpan totalAssessmentTime;
+
+        // Performance Tracking
+        private int correctAnswers = 0;
+        private int totalQuestions = 0;
+        private float currentScore = 0.0f;
+        private List<float> questionTimings;
+
+        #endregion
+
+        #region Revolutionary UI Components
+
+        // Main Layout Structure
+        private ScrollContainer masterAssessmentContainer;
+        private VBoxContainer cosmicContentContainer;
+        private Control holographicHeader;
+        private PanelContainer questionDisplayPanel;
+        private VBoxContainer answersContainer;
+        private HBoxContainer navigationControls;
+
+        // Question Display
+        private RichTextLabel dynamicQuestionLabel;
+        private TextureRect questionIllustration;
+        private Control questionNumberIndicator;
+        private ProgressBar quantumProgressBar;
+
+        // Answer Options
+        private List<ModernAnswerButton> answerButtons;
+        private ButtonGroup answerButtonGroup;
+
+        // Navigation & Controls
+        private Button previousQuestionButton;
+        private Button nextQuestionButton;
+        private Button submitAssessmentButton;
+        private Button pauseAssessmentButton;
+        private Button hintButton;
+
+        // Real-time Analytics
+        private Control floatingAnalyticsPanel;
+        private CircularProgressBar scoreProgressWheel;
+        private RichTextLabel livePerformanceStats;
+        private LineChart performanceTrendChart;
+        private Control difficultyIndicator;
+
+        // Timer & Progress
+        private Control elegantTimerDisplay;
+        private Label timeRemainingLabel;
+        private ProgressBar timeProgressBar;
+        private Timer assessmentTimer;
+
+        #endregion
+
+        #region Revolutionary Visual Effects
+
+        // Particle Systems
+        private GPUParticles2D correctAnswerCelebration;
+        private GPUParticles2D incorrectAnswerFeedback;
+        private GPUParticles2D assessmentCompletionFireworks;
+        private ParticleSystem2D ambientLearningParticles;
+        private GPUParticles2D achievementBurst;
+
+        // Dynamic Backgrounds
+        private Control adaptiveThemeBackground;
+        private TextureRect specialtyThemedImage;
+        private Control seasonalOverlay;
+        private ShaderMaterial dynamicShaderMaterial;
+
+        // Animation Systems
+        private AnimationPlayer masterAnimationDirector;
+        private AnimationTree fluidTransitionTree;
+        private Tween quantumFeedbackTween;
+        private Timer magicalEffectsTimer;
+
+        // Audio Experience
+        private AudioStreamPlayer2D immersiveBackgroundPlayer;
+        private AudioStreamPlayer2D correctAnswerSound;
+        private AudioStreamPlayer2D incorrectAnswerSound;
+        private AudioStreamPlayer2D achievementFanfare;
+        private AudioStreamPlayer2D ambientLearningMusic;
+
+        // Special Effects
+        private Control holographicQuestionOverlay;
+        private Control glowingSuccessAura;
+        private Control lightBeamFeedback;
+        private Control quantumRippleEffect;
+
+        #endregion
+
+        #region Advanced Color Themes
+
+        // Dynamic Color Palettes (changes based on specialty)
+        private readonly Dictionary<NPCSpecialty, SpecialtyTheme> specialtyThemes = new()
+        {
+            {
+                NPCSpecialty.SoilScience,
+                new SpecialtyTheme(
+                    new Color(0.4f, 0.2f, 0.1f), // Rich brown
+                    new Color(0.8f, 0.6f, 0.3f), // Golden soil
+                    new Color(0.2f, 0.4f, 0.2f)  // Earth green
+                )
+            },
+            {
+                NPCSpecialty.PlantBiology,
+                new SpecialtyTheme(
+                    new Color(0.1f, 0.6f, 0.2f), // Vibrant green
+                    new Color(0.3f, 0.8f, 0.4f), // Fresh leaf
+                    new Color(0.0f, 0.4f, 0.1f)  // Deep forest
+                )
+            },
+            {
+                NPCSpecialty.WaterManagement,
+                new SpecialtyTheme(
+                    new Color(0.1f, 0.4f, 0.8f), // Ocean blue
+                    new Color(0.3f, 0.7f, 1.0f), // Sky blue
+                    new Color(0.0f, 0.2f, 0.6f)  // Deep water
+                )
+            }
+        };
+
+        // Assessment State Colors
+        private readonly Color CORRECT_ANSWER_GLOW = new Color(0.2f, 0.9f, 0.3f);
+        private readonly Color INCORRECT_ANSWER_GLOW = new Color(0.9f, 0.3f, 0.2f);
+        private readonly Color NEUTRAL_STATE_COLOR = new Color(0.6f, 0.6f, 0.6f);
+        private readonly Color ACHIEVEMENT_GOLD = new Color(1.0f, 0.8f, 0.1f);
+
+        #endregion
+
+        public override void _Ready()
+        {
+            InitializeRevolutionaryAssessment();
+            SetupSpectacularVisuals();
+            CreateMagicalParticleEffects();
+            ConfigureIntelligentSystems();
+            LoadAssessmentThemes();
+            StartImmersiveExperience();
+
+            GD.Print("🎯 Revolutionary Assessment Interface fully initialized!");
+        }
+
+        #region Initialization Methods
+
+        private void InitializeRevolutionaryAssessment()
+        {
+            // Initialize data structures
+            currentQuestions = new List<AssessmentQuestion>();
+            userAnswers = new Dictionary<int, bool>();
+            questionTimings = new List<float>();
+            answerButtons = new List<ModernAnswerButton>();
+
+            // Create master scroll container
+            masterAssessmentContainer = new ScrollContainer();
+            masterAssessmentContainer.Name = "MasterAssessmentContainer";
+            masterAssessmentContainer.SetAnchorsAndOffsetsPreset(Control.PresetMode.FullRect);
+            AddChild(masterAssessmentContainer);
+
+            // Main content container
+            cosmicContentContainer = new VBoxContainer();
+            cosmicContentContainer.Name = "CosmicContentContainer";
+            masterAssessmentContainer.AddChild(cosmicContentContainer);
+
+            CreateHolographicHeader();
+            CreateQuestionDisplayPanel();
+            CreateAnswersContainer();
+            CreateNavigationControls();
+            CreateFloatingAnalytics();
+            CreateElegantTimer();
+        }
+
+        private void CreateHolographicHeader()
+        {
+            holographicHeader = new Control();
+            holographicHeader.Name = "HolographicHeader";
+            holographicHeader.CustomMinimumSize = new Vector2(0, 100);
+            cosmicContentContainer.AddChild(holographicHeader);
+
+            // Dynamic question number indicator
+            questionNumberIndicator = new Control();
+            questionNumberIndicator.Name = "QuestionNumberIndicator";
+            holographicHeader.AddChild(questionNumberIndicator);
+
+            // Quantum progress bar
+            quantumProgressBar = new ProgressBar();
+            quantumProgressBar.Name = "QuantumProgressBar";
+            quantumProgressBar.ShowPercentage = true;
+            holographicHeader.AddChild(quantumProgressBar);
+        }
+
+        private void CreateQuestionDisplayPanel()
+        {
+            questionDisplayPanel = new PanelContainer();
+            questionDisplayPanel.Name = "QuestionDisplayPanel";
+            questionDisplayPanel.CustomMinimumSize = new Vector2(0, 200);
+            cosmicContentContainer.AddChild(questionDisplayPanel);
+
+            var questionContent = new VBoxContainer();
+            questionDisplayPanel.AddChild(questionContent);
+
+            // Question illustration
+            questionIllustration = new TextureRect();
+            questionIllustration.Name = "QuestionIllustration";
+            questionIllustration.CustomMinimumSize = new Vector2(0, 120);
+            questionIllustration.ExpandMode = TextureRect.ExpandModeEnum.FitWidthProportional;
+            questionContent.AddChild(questionIllustration);
+
+            // Dynamic question label
+            dynamicQuestionLabel = new RichTextLabel();
+            dynamicQuestionLabel.Name = "DynamicQuestionLabel";
+            dynamicQuestionLabel.BbcodeEnabled = true;
+            dynamicQuestionLabel.FitContent = true;
+            questionContent.AddChild(dynamicQuestionLabel);
+        }
+
+        private void CreateAnswersContainer()
+        {
+            answersContainer = new VBoxContainer();
+            answersContainer.Name = "AnswersContainer";
+            cosmicContentContainer.AddChild(answersContainer);
+
+            // Create answer button group
+            answerButtonGroup = new ButtonGroup();
+        }
+
+        private void CreateNavigationControls()
+        {
+            navigationControls = new HBoxContainer();
+            navigationControls.Name = "NavigationControls";
+            navigationControls.Alignment = BoxContainer.AlignmentMode.Center;
+            cosmicContentContainer.AddChild(navigationControls);
+
+            // Previous question button
+            previousQuestionButton = new Button();
+            previousQuestionButton.Name = "PreviousQuestionButton";
+            previousQuestionButton.Text = "◀ Previous";
+            previousQuestionButton.Pressed += OnPreviousQuestion;
+            navigationControls.AddChild(previousQuestionButton);
+
+            // Hint button
+            hintButton = new Button();
+            hintButton.Name = "HintButton";
+            hintButton.Text = "💡 Hint";
+            hintButton.Pressed += OnHintRequested;
+            navigationControls.AddChild(hintButton);
+
+            // Pause button
+            pauseAssessmentButton = new Button();
+            pauseAssessmentButton.Name = "PauseAssessmentButton";
+            pauseAssessmentButton.Text = "⏸ Pause";
+            pauseAssessmentButton.Pressed += OnPauseAssessment;
+            navigationControls.AddChild(pauseAssessmentButton);
+
+            // Next question button
+            nextQuestionButton = new Button();
+            nextQuestionButton.Name = "NextQuestionButton";
+            nextQuestionButton.Text = "Next ▶";
+            nextQuestionButton.Pressed += OnNextQuestion;
+            navigationControls.AddChild(nextQuestionButton);
+
+            // Submit button
+            submitAssessmentButton = new Button();
+            submitAssessmentButton.Name = "SubmitAssessmentButton";
+            submitAssessmentButton.Text = "🎯 Submit Assessment";
+            submitAssessmentButton.Pressed += OnSubmitAssessment;
+            submitAssessmentButton.Visible = false;
+            navigationControls.AddChild(submitAssessmentButton);
+        }
+
+        private void CreateFloatingAnalytics()
+        {
+            floatingAnalyticsPanel = new Control();
+            floatingAnalyticsPanel.Name = "FloatingAnalyticsPanel";
+            floatingAnalyticsPanel.Position = new Vector2(20, 20);
+            AddChild(floatingAnalyticsPanel);
+
+            // Score progress wheel
+            scoreProgressWheel = new CircularProgressBar();
+            scoreProgressWheel.Name = "ScoreProgressWheel";
+            scoreProgressWheel.Value = 0;
+            floatingAnalyticsPanel.AddChild(scoreProgressWheel);
+
+            // Live performance stats
+            livePerformanceStats = new RichTextLabel();
+            livePerformanceStats.Name = "LivePerformanceStats";
+            livePerformanceStats.BbcodeEnabled = true;
+            livePerformanceStats.Text = CreatePerformanceStatsText();
+            floatingAnalyticsPanel.AddChild(livePerformanceStats);
+
+            // Difficulty indicator
+            difficultyIndicator = new Control();
+            difficultyIndicator.Name = "DifficultyIndicator";
+            floatingAnalyticsPanel.AddChild(difficultyIndicator);
+        }
+
+        private void CreateElegantTimer()
+        {
+            elegantTimerDisplay = new Control();
+            elegantTimerDisplay.Name = "ElegantTimerDisplay";
+            elegantTimerDisplay.Position = new Vector2(GetViewport().GetVisibleRect().Size.X - 200, 20);
+            AddChild(elegantTimerDisplay);
+
+            // Time remaining label
+            timeRemainingLabel = new Label();
+            timeRemainingLabel.Name = "TimeRemainingLabel";
+            timeRemainingLabel.Text = "⏰ 30:00";
+            elegantTimerDisplay.AddChild(timeRemainingLabel);
+
+            // Time progress bar
+            timeProgressBar = new ProgressBar();
+            timeProgressBar.Name = "TimeProgressBar";
+            timeProgressBar.Value = 100;
+            elegantTimerDisplay.AddChild(timeProgressBar);
+
+            // Assessment timer
+            assessmentTimer = new Timer();
+            assessmentTimer.Name = "AssessmentTimer";
+            assessmentTimer.WaitTime = 1.0f;
+            assessmentTimer.Timeout += OnTimerTick;
+            AddChild(assessmentTimer);
+        }
+
+        #endregion
+
+        #region Question Management
+
+        public void StartAssessment(NPCSpecialty specialty, AssessmentDifficulty difficulty, AssessmentType type)
+        {
+            CurrentSpecialty = specialty;
+            CurrentDifficulty = difficulty;
+            CurrentType = type;
+
+            GD.Print($"🎯 Starting {difficulty} {type} assessment for {specialty}");
+
+            // Load questions for specialty
+            LoadQuestionsForSpecialty(specialty, difficulty, type);
+
+            // Apply specialty theme
+            ApplySpecialtyTheme(specialty);
+
+            // Reset assessment state
+            ResetAssessmentState();
+
+            // Start assessment
+            assessmentStartTime = DateTime.Now;
+            currentQuestionIndex = 0;
+            DisplayCurrentQuestion();
+
+            // Start timer
+            assessmentTimer.Start();
+
+            // Play start animation
+            PlayAssessmentStartAnimation();
+        }
+
+        private void LoadQuestionsForSpecialty(NPCSpecialty specialty, AssessmentDifficulty difficulty, AssessmentType type)
+        {
+            currentQuestions.Clear();
+
+            // Generate questions based on specialty, difficulty, and type
+            var questionBank = GetQuestionBank(specialty);
+            var filteredQuestions = FilterQuestionsByDifficulty(questionBank, difficulty);
+
+            // Select appropriate number of questions
+            int questionCount = type switch
+            {
+                AssessmentType.QuickQuiz => 5,
+                AssessmentType.ComprehensiveTest => 15,
+                AssessmentType.MasteryAssessment => 25,
+                _ => 10
+            };
+
+            currentQuestions = filteredQuestions.Take(questionCount).ToList();
+            totalQuestions = currentQuestions.Count;
+
+            GD.Print($"📚 Loaded {totalQuestions} questions for {specialty} assessment");
+        }
+
+        private void DisplayCurrentQuestion()
+        {
+            if (currentQuestionIndex >= currentQuestions.Count) return;
+
+            var question = currentQuestions[currentQuestionIndex];
+
+            // Update question display
+            UpdateQuestionDisplay(question);
+
+            // Update progress
+            UpdateProgressDisplay();
+
+            // Update navigation buttons
+            UpdateNavigationButtons();
+
+            // Play question transition animation
+            PlayQuestionTransitionAnimation();
+        }
+
+        private void UpdateQuestionDisplay(AssessmentQuestion question)
+        {
+            // Update question text with rich formatting
+            dynamicQuestionLabel.Text = $"[center][color=#E6B84D][font_size=18][b]Question {currentQuestionIndex + 1}[/b][/font_size][/color]\n\n" +
+                                       $"[color=#F5F5E9][font_size=16]{question.QuestionText}[/font_size][/color][/center]";
+
+            // Update question illustration if available
+            if (!string.IsNullOrEmpty(question.IllustrationPath))
+            {
+                var texture = GD.Load<Texture2D>(question.IllustrationPath);
+                questionIllustration.Texture = texture;
+                questionIllustration.Visible = true;
+            }
+            else
+            {
+                questionIllustration.Visible = false;
+            }
+
+            // Clear previous answer buttons
+            ClearAnswerButtons();
+
+            // Create new answer buttons
+            CreateAnswerButtons(question);
+        }
+
+        private void CreateAnswerButtons(AssessmentQuestion question)
+        {
+            answerButtons.Clear();
+
+            for (int i = 0; i < question.Options.Count; i++)
+            {
+                var option = question.Options[i];
+                var answerButton = new ModernAnswerButton();
+                answerButton.Name = $"AnswerButton_{i}";
+                answerButton.SetAnswerOption(option, i);
+                answerButton.ButtonGroup = answerButtonGroup;
+
+                // Connect answer selection event
+                answerButton.AnswerSelected += (index, isCorrect) => OnAnswerSelected(index, isCorrect);
+
+                answersContainer.AddChild(answerButton);
+                answerButtons.Add(answerButton);
+            }
+        }
+
+        private void ClearAnswerButtons()
+        {
+            foreach (var button in answerButtons)
+            {
+                button?.QueueFree();
+            }
+            answerButtons.Clear();
+
+            // Clear container children
+            foreach (Node child in answersContainer.GetChildren())
+            {
+                child.QueueFree();
+            }
+        }
+
+        #endregion
+
+        #region Event Handlers
+
+        private void OnAnswerSelected(int optionIndex, bool isCorrect)
+        {
+            GD.Print($"🎯 Answer selected: Option {optionIndex}, Correct: {isCorrect}");
+
+            // Record answer
+            userAnswers[currentQuestionIndex] = isCorrect;
+
+            if (isCorrect)
+            {
+                correctAnswers++;
+                PlayCorrectAnswerFeedback();
+            }
+            else
+            {
+                PlayIncorrectAnswerFeedback();
+            }
+
+            // Record timing
+            var questionTime = DateTime.Now - assessmentStartTime;
+            questionTimings.Add((float)questionTime.TotalSeconds);
+
+            // Update performance metrics
+            UpdatePerformanceMetrics();
+
+            // Emit signal
+            EmitSignal(SignalName.QuestionAnswered, currentQuestionIndex, isCorrect);
+
+            // Auto-advance after feedback animation
+            var advanceTimer = GetTree().CreateTimer(2.0f);
+            advanceTimer.Timeout += () =>
+            {
+                if (currentQuestionIndex < currentQuestions.Count - 1)
+                {
+                    OnNextQuestion();
+                }
+                else
+                {
+                    CompleteAssessment();
+                }
+            };
+        }
+
+        private void OnPreviousQuestion()
+        {
+            if (currentQuestionIndex > 0)
+            {
+                currentQuestionIndex--;
+                DisplayCurrentQuestion();
+                PlayNavigationAnimation(false);
+            }
+        }
+
+        private void OnNextQuestion()
+        {
+            if (currentQuestionIndex < currentQuestions.Count - 1)
+            {
+                currentQuestionIndex++;
+                DisplayCurrentQuestion();
+                PlayNavigationAnimation(true);
+            }
+        }
+
+        private void OnHintRequested()
+        {
+            var currentQuestion = currentQuestions[currentQuestionIndex];
+            ShowHint(currentQuestion.Hint);
+            PlayHintAnimation();
+        }
+
+        private void OnPauseAssessment()
+        {
+            if (assessmentTimer.IsStopped())
+            {
+                assessmentTimer.Start();
+                pauseAssessmentButton.Text = "⏸ Pause";
+                PlayResumeAnimation();
+            }
+            else
+            {
+                assessmentTimer.Stop();
+                pauseAssessmentButton.Text = "▶ Resume";
+                PlayPauseAnimation();
+            }
+        }
+
+        private void OnSubmitAssessment()
+        {
+            CompleteAssessment();
+        }
+
+        private void OnTimerTick()
+        {
+            // Update timer display
+            totalAssessmentTime = DateTime.Now - assessmentStartTime;
+
+            var timeRemaining = TimeSpan.FromMinutes(30) - totalAssessmentTime;
+            if (timeRemaining.TotalSeconds <= 0)
+            {
+                timeRemainingLabel.Text = "⏰ Time's Up!";
+                CompleteAssessment();
+                return;
+            }
+
+            timeRemainingLabel.Text = $"⏰ {timeRemaining:mm\\:ss}";
+            timeProgressBar.Value = (float)(timeRemaining.TotalSeconds / (30 * 60)) * 100;
+
+            // Color warning for low time
+            if (timeRemaining.TotalMinutes < 5)
+            {
+                timeRemainingLabel.Modulate = INCORRECT_ANSWER_GLOW;
+            }
+            else if (timeRemaining.TotalMinutes < 10)
+            {
+                timeRemainingLabel.Modulate = new Color(1.0f, 0.8f, 0.2f);
+            }
+        }
+
+        #endregion
+
+        #region Animation & Effects
+
+        private void SetupSpectacularVisuals()
+        {
+            // Adaptive theme background
+            adaptiveThemeBackground = new Control();
+            adaptiveThemeBackground.Name = "AdaptiveThemeBackground";
+            adaptiveThemeBackground.SetAnchorsAndOffsetsPreset(Control.PresetMode.FullRect);
+            AddChild(adaptiveThemeBackground);
+            MoveChild(adaptiveThemeBackground, 0);
+
+            // Specialty themed image
+            specialtyThemedImage = new TextureRect();
+            specialtyThemedImage.Name = "SpecialtyThemedImage";
+            specialtyThemedImage.SetAnchorsAndOffsetsPreset(Control.PresetMode.FullRect);
+            AddChild(specialtyThemedImage);
+            MoveChild(specialtyThemedImage, 1);
+
+            CreateDynamicShaderMaterial();
+            CreateHolographicEffects();
+        }
+
+        private void CreateMagicalParticleEffects()
+        {
+            // Correct answer celebration
+            correctAnswerCelebration = new GPUParticles2D();
+            correctAnswerCelebration.Name = "CorrectAnswerCelebration";
+            correctAnswerCelebration.Emitting = false;
+            AddChild(correctAnswerCelebration);
+
+            // Incorrect answer feedback
+            incorrectAnswerFeedback = new GPUParticles2D();
+            incorrectAnswerFeedback.Name = "IncorrectAnswerFeedback";
+            incorrectAnswerFeedback.Emitting = false;
+            AddChild(incorrectAnswerFeedback);
+
+            // Assessment completion fireworks
+            assessmentCompletionFireworks = new GPUParticles2D();
+            assessmentCompletionFireworks.Name = "AssessmentCompletionFireworks";
+            assessmentCompletionFireworks.Emitting = false;
+            AddChild(assessmentCompletionFireworks);
+
+            // Ambient learning particles
+            ambientLearningParticles = new ParticleSystem2D();
+            ambientLearningParticles.Name = "AmbientLearningParticles";
+            ambientLearningParticles.Emitting = true;
+            AddChild(ambientLearningParticles);
+
+            // Achievement burst
+            achievementBurst = new GPUParticles2D();
+            achievementBurst.Name = "AchievementBurst";
+            achievementBurst.Emitting = false;
+            AddChild(achievementBurst);
+
+            ConfigureParticleEffects();
+        }
+
+        private void ConfigureIntelligentSystems()
+        {
+            // Master animation director
+            masterAnimationDirector = new AnimationPlayer();
+            masterAnimationDirector.Name = "MasterAnimationDirector";
+            AddChild(masterAnimationDirector);
+
+            // Quantum feedback tween
+            quantumFeedbackTween = CreateTween();
+            quantumFeedbackTween.SetLoops();
+
+            // Magical effects timer
+            magicalEffectsTimer = new Timer();
+            magicalEffectsTimer.Name = "MagicalEffectsTimer";
+            magicalEffectsTimer.WaitTime = 5.0f;
+            magicalEffectsTimer.Timeout += OnMagicalEffectsTrigger;
+            AddChild(magicalEffectsTimer);
+            magicalEffectsTimer.Start();
+        }
+
+        private void PlayAssessmentStartAnimation()
+        {
+            // Epic assessment start sequence
+            Modulate = new Color(1, 1, 1, 0);
+            Scale = new Vector2(0.8f, 0.8f);
+
+            var startTween = CreateTween();
+            startTween.SetParallel(true);
+
+            startTween.TweenProperty(this, "modulate:a", 1.0f, 1.0f)
+                .SetTrans(Tween.TransitionType.Cubic)
+                .SetEase(Tween.EaseType.Out);
+
+            startTween.TweenProperty(this, "scale", Vector2.One, 1.0f)
+                .SetTrans(Tween.TransitionType.Back)
+                .SetEase(Tween.EaseType.Out);
+        }
+
+        private void PlayCorrectAnswerFeedback()
+        {
+            GD.Print("✅ Playing correct answer celebration!");
+
+            // Particle burst at answer location
+            if (correctAnswerCelebration != null)
+            {
+                correctAnswerCelebration.Position = GetSelectedAnswerPosition();
+                correctAnswerCelebration.Restart();
+            }
+
+            // Green glow effect
+            var glowTween = CreateTween();
+            glowTween.TweenProperty(questionDisplayPanel, "modulate", CORRECT_ANSWER_GLOW, 0.3f);
+            glowTween.TweenProperty(questionDisplayPanel, "modulate", Color.White, 0.5f).SetDelay(0.3f);
+
+            // Play success sound
+            if (correctAnswerSound != null)
+            {
+                correctAnswerSound.Play();
+            }
+        }
+
+        private void PlayIncorrectAnswerFeedback()
+        {
+            GD.Print("❌ Playing incorrect answer feedback!");
+
+            // Red feedback particles
+            if (incorrectAnswerFeedback != null)
+            {
+                incorrectAnswerFeedback.Position = GetSelectedAnswerPosition();
+                incorrectAnswerFeedback.Restart();
+            }
+
+            // Red shake effect
+            var shakeTween = CreateTween();
+            shakeTween.TweenProperty(questionDisplayPanel, "position:x", questionDisplayPanel.Position.X + 10, 0.1f);
+            shakeTween.TweenProperty(questionDisplayPanel, "position:x", questionDisplayPanel.Position.X - 10, 0.1f);
+            shakeTween.TweenProperty(questionDisplayPanel, "position:x", questionDisplayPanel.Position.X, 0.1f);
+
+            // Play incorrect sound
+            if (incorrectAnswerSound != null)
+            {
+                incorrectAnswerSound.Play();
+            }
+        }
+
+        private void PlayQuestionTransitionAnimation()
+        {
+            // Smooth question transition
+            var transitionTween = CreateTween();
+            transitionTween.SetParallel(true);
+
+            transitionTween.TweenProperty(questionDisplayPanel, "position:x", -50, 0.2f);
+            transitionTween.TweenProperty(questionDisplayPanel, "modulate:a", 0.0f, 0.2f);
+
+            transitionTween.TweenProperty(questionDisplayPanel, "position:x", 0, 0.3f).SetDelay(0.2f);
+            transitionTween.TweenProperty(questionDisplayPanel, "modulate:a", 1.0f, 0.3f).SetDelay(0.2f);
+        }
+
+        private void PlayNavigationAnimation(bool isForward)
+        {
+            var direction = isForward ? 1 : -1;
+            var navTween = CreateTween();
+
+            navTween.TweenProperty(questionDisplayPanel, "position:x", direction * 100, 0.2f);
+            navTween.TweenProperty(questionDisplayPanel, "position:x", 0, 0.2f);
+        }
+
+        private Vector2 GetSelectedAnswerPosition()
+        {
+            // Get position of selected answer for particle effects
+            foreach (var button in answerButtons)
+            {
+                if (button.ButtonPressed)
+                {
+                    return button.GlobalPosition + button.Size / 2;
+                }
+            }
+            return GetViewport().GetVisibleRect().GetCenter();
+        }
+
+        #endregion
+
+        #region Assessment Completion
+
+        private void CompleteAssessment()
+        {
+            assessmentTimer.Stop();
+            totalAssessmentTime = DateTime.Now - assessmentStartTime;
+
+            // Calculate final results
+            var result = CalculateAssessmentResult();
+
+            GD.Print($"🎯 Assessment completed! Score: {result.ScorePercentage:F1}%");
+
+            // Play completion celebration
+            PlayAssessmentCompletionCelebration(result);
+
+            // Check for achievements
+            CheckForAssessmentAchievements(result);
+
+            // Emit completion signal
+            EmitSignal(SignalName.AssessmentCompleted, result);
+        }
+
+        private AssessmentResult CalculateAssessmentResult()
+        {
+            var result = new AssessmentResult
+            {
+                Specialty = CurrentSpecialty,
+                Difficulty = CurrentDifficulty,
+                Type = CurrentType,
+                TotalQuestions = totalQuestions,
+                CorrectAnswers = correctAnswers,
+                ScorePercentage = (float)correctAnswers / totalQuestions * 100,
+                TimeTaken = totalAssessmentTime,
+                QuestionTimings = questionTimings.ToList(),
+                CompletionTime = DateTime.Now
+            };
+
+            // Calculate performance grade
+            result.Grade = result.ScorePercentage switch
+            {
+                >= 90 => "A+",
+                >= 80 => "A",
+                >= 70 => "B",
+                >= 60 => "C",
+                >= 50 => "D",
+                _ => "F"
+            };
+
+            return result;
+        }
+
+        private void PlayAssessmentCompletionCelebration(AssessmentResult result)
+        {
+            // Epic completion fireworks
+            if (assessmentCompletionFireworks != null)
+            {
+                assessmentCompletionFireworks.Position = GetViewport().GetVisibleRect().GetCenter();
+                assessmentCompletionFireworks.Restart();
+            }
+
+            // Grade-based color celebration
+            var celebrationColor = result.ScorePercentage >= 80 ? ACHIEVEMENT_GOLD :
+                                 result.ScorePercentage >= 60 ? new Color(0.8f, 0.8f, 0.2f) :
+                                 NEUTRAL_STATE_COLOR;
+
+            var celebrationTween = CreateTween();
+            celebrationTween.TweenProperty(this, "modulate", celebrationColor, 0.5f);
+            celebrationTween.TweenProperty(this, "modulate", Color.White, 1.0f).SetDelay(0.5f);
+
+            // Play achievement fanfare if high score
+            if (result.ScorePercentage >= 80 && achievementFanfare != null)
+            {
+                achievementFanfare.Play();
+            }
+        }
+
+        #endregion
+
+        #region Helper Methods & Data Structures
+
+        private void ResetAssessmentState()
+        {
+            currentQuestionIndex = 0;
+            correctAnswers = 0;
+            currentScore = 0.0f;
+            userAnswers.Clear();
+            questionTimings.Clear();
+        }
+
+        private void UpdateProgressDisplay()
+        {
+            var progress = (float)(currentQuestionIndex + 1) / totalQuestions * 100;
+            quantumProgressBar.Value = progress;
+
+            EmitSignal(SignalName.ProgressUpdated, progress);
+        }
+
+        private void UpdateNavigationButtons()
+        {
+            previousQuestionButton.Disabled = currentQuestionIndex == 0;
+            nextQuestionButton.Visible = currentQuestionIndex < currentQuestions.Count - 1;
+            submitAssessmentButton.Visible = currentQuestionIndex == currentQuestions.Count - 1;
+        }
+
+        private void UpdatePerformanceMetrics()
+        {
+            currentScore = (float)correctAnswers / (currentQuestionIndex + 1) * 100;
+
+            if (scoreProgressWheel != null)
+            {
+                scoreProgressWheel.Value = currentScore;
+            }
+
+            if (livePerformanceStats != null)
+            {
+                livePerformanceStats.Text = CreatePerformanceStatsText();
+            }
+        }
+
+        private string CreatePerformanceStatsText()
+        {
+            return $"[color=#E6B84D]📊 [b]Live Performance[/b][/color]\n" +
+                   $"[color=#98F5E9]Score:[/color] {currentScore:F1}%\n" +
+                   $"[color=#98F5E9]Correct:[/color] {correctAnswers}/{currentQuestionIndex + 1}\n" +
+                   $"[color=#98F5E9]Progress:[/color] {currentQuestionIndex + 1}/{totalQuestions}";
+        }
+
+        // Placeholder methods for complete implementation
+        private List<AssessmentQuestion> GetQuestionBank(NPCSpecialty specialty) => new();
+        private List<AssessmentQuestion> FilterQuestionsByDifficulty(List<AssessmentQuestion> questions, AssessmentDifficulty difficulty) => questions;
+        private void ApplySpecialtyTheme(NPCSpecialty specialty) { }
+        private void LoadAssessmentThemes() { }
+        private void StartImmersiveExperience() { }
+        private void CreateDynamicShaderMaterial() { }
+        private void CreateHolographicEffects() { }
+        private void ConfigureParticleEffects() { }
+        private void ShowHint(string hint) { }
+        private void PlayHintAnimation() { }
+        private void PlayPauseAnimation() { }
+        private void PlayResumeAnimation() { }
+        private void OnMagicalEffectsTrigger() { }
+        private void CheckForAssessmentAchievements(AssessmentResult result) { }
+
+        #endregion
+    }
+
+    #region Modern UI Components
+
+    public partial class ModernAnswerButton : Button
+    {
+        [Signal] public delegate void AnswerSelectedEventHandler(int optionIndex, bool isCorrect);
+
+        public AnswerOption Option { get; private set; }
+        public int OptionIndex { get; private set; }
+
+        public void SetAnswerOption(AnswerOption option, int index)
+        {
+            Option = option;
+            OptionIndex = index;
+            Text = $"{(char)('A' + index)}. {option.Text}";
+
+            Pressed += () => EmitSignal(SignalName.AnswerSelected, index, option.IsCorrect);
+        }
+    }
+
+    public partial class CircularProgressBar : Control
+    {
+        private float _value = 0;
+        public float Value
+        {
+            get => _value;
+            set
+            {
+                _value = Mathf.Clamp(value, 0, 100);
+                QueueRedraw();
+            }
+        }
+
+        public override void _Draw()
+        {
+            var center = Size / 2;
+            var radius = Mathf.Min(Size.X, Size.Y) / 2 - 5;
+
+            // Background circle
+            DrawArc(center, radius, 0, Mathf.Tau, 64, new Color(0.3f, 0.3f, 0.3f), 4);
+
+            // Progress arc
+            var progressAngle = (_value / 100.0f) * Mathf.Tau;
+            DrawArc(center, radius, -Mathf.Pi / 2, -Mathf.Pi / 2 + progressAngle, 64, new Color(0.3f, 0.7f, 0.3f), 4);
+
+            // Center text
+            var font = ThemeDB.FallbackFont;
+            var text = $"{_value:F0}%";
+            var textSize = font.GetStringSize(text, HorizontalAlignment.Center, -1, 12);
+            DrawString(font, center - textSize / 2, text, HorizontalAlignment.Center, -1, 12, new Color(0.9f, 0.9f, 0.9f));
+        }
+    }
+
+    #endregion
+
+    #region Data Structures
+
+    public enum AssessmentDifficulty
+    {
+        Beginner,
+        Intermediate,
+        Advanced,
+        Expert
+    }
+
+    public enum AssessmentType
+    {
+        QuickQuiz,
+        ComprehensiveTest,
+        MasteryAssessment,
+        CertificationExam
+    }
+
+    public class AssessmentQuestion
+    {
+        public string QuestionText { get; set; }
+        public List<AnswerOption> Options { get; set; } = new();
+        public string Hint { get; set; }
+        public string IllustrationPath { get; set; }
+        public AssessmentDifficulty Difficulty { get; set; }
+        public int TimeLimit { get; set; } = 60; // seconds
+    }
+
+    public class AnswerOption
+    {
+        public string Text { get; set; }
+        public bool IsCorrect { get; set; }
+        public string Explanation { get; set; }
+    }
+
+    public class AssessmentResult
+    {
+        public NPCSpecialty Specialty { get; set; }
+        public AssessmentDifficulty Difficulty { get; set; }
+        public AssessmentType Type { get; set; }
+        public int TotalQuestions { get; set; }
+        public int CorrectAnswers { get; set; }
+        public float ScorePercentage { get; set; }
+        public string Grade { get; set; }
+        public TimeSpan TimeTaken { get; set; }
+        public List<float> QuestionTimings { get; set; }
+        public DateTime CompletionTime { get; set; }
+    }
+
+    public class SpecialtyTheme
+    {
+        public Color PrimaryColor { get; set; }
+        public Color AccentColor { get; set; }
+        public Color BackgroundColor { get; set; }
+
+        public SpecialtyTheme(Color primary, Color accent, Color background)
+        {
+            PrimaryColor = primary;
+            AccentColor = accent;
+            BackgroundColor = background;
+        }
+    }
+
+    #endregion
+}

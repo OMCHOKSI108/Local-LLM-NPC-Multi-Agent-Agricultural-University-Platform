@@ -261,7 +261,7 @@ public delegate void AssessmentCompletedEventHandler(AssessmentResult result);
 
 1. **Clone Repository**
    ```bash
-   git clone https://github.com/your-username/local-llm-npc.git
+   git clone https://github.com/omchoksi108/Local-LLM-NPC-Multi-Agent-Agricultural-University-Platform.git
    cd local-llm-npc
    ```
 
@@ -369,7 +369,7 @@ MIT License - Created by Om Choksi
 For technical questions or contributions, please contact:
 - **Author**: Om Choksi
 - **Project**: Local LLM NPC Agricultural University
-- **Repository**: https://github.com/your-username/local-llm-npc
+- **Repository**: https://github.com/omchoksi108/Local-LLM-NPC-Multi-Agent-Agricultural-University-Platform
 
 ---
 

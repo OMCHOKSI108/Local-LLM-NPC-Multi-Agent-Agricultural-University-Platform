@@ -186,11 +186,11 @@ local-llm-npc/
 
 Your **Local LLM NPC Agricultural University Platform** is now fully documented and ready for professional video demonstration. The project showcases:
 
-✅ **Multi-Agent AI System** with 7 specialized professors  
-✅ **Adaptive Learning Assessment** with real-time analytics  
-✅ **Completely Offline Operation** using local AI models  
-✅ **Professional UI/UX** designed for educational excellence  
-✅ **Comprehensive Documentation** for deployment and usage  
+   **Multi-Agent AI System** with 7 specialized professors  
+   **Adaptive Learning Assessment** with real-time analytics  
+   **Completely Offline Operation** using local AI models  
+   **Professional UI/UX** designed for educational excellence  
+   **Comprehensive Documentation** for deployment and usage  
 
 **Created by Om Choksi** - A revolutionary approach to AI-powered agricultural education!
 

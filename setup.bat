@@ -12,7 +12,7 @@ echo.
 REM Function to check if command exists
 where ollama >nul 2>nul
 if %errorlevel% == 0 (
-    echo ✅ Ollama: Installed
+    echo    Ollama: Installed
     set OLLAMA_INSTALLED=1
 ) else (
     echo ❌ Ollama: Not installed
@@ -21,7 +21,7 @@ if %errorlevel% == 0 (
 
 where godot >nul 2>nul
 if %errorlevel% == 0 (
-    echo ✅ Godot: Installed
+    echo    Godot: Installed
     set GODOT_INSTALLED=1
 ) else (
     echo ❌ Godot: Not installed
@@ -30,7 +30,7 @@ if %errorlevel% == 0 (
 
 where dotnet >nul 2>nul
 if %errorlevel% == 0 (
-    echo ✅ .NET SDK: Installed
+    echo    .NET SDK: Installed
     set DOTNET_INSTALLED=1
 ) else (
     echo ❌ .NET SDK: Not installed
@@ -102,7 +102,7 @@ echo Downloading Gemma 9B (better quality model)...
 ollama pull gemma2:9b
 
 echo.
-echo ✅ AI models installed successfully!
+echo    AI models installed successfully!
 ollama list
 echo.
 pause
@@ -123,7 +123,7 @@ echo Building project...
 dotnet build --configuration Release
 
 if %errorlevel% == 0 (
-    echo ✅ Project built successfully!
+    echo    Project built successfully!
 ) else (
     echo ❌ Build failed. Check the error messages above.
 )
@@ -144,7 +144,7 @@ echo Starting the game...
 if exist "BIN\WINDOWS\local-llm-npc (4.4).exe" (
     start "Local LLM NPC" "BIN\WINDOWS\local-llm-npc (4.4).exe"
     echo.
-    echo ✅ Game started! 
+    echo    Game started! 
     echo 💡 In game settings, set Ollama URL to: http://localhost:11434
 ) else (
     echo ❌ Executable not found at BIN\WINDOWS\local-llm-npc (4.4).exe
@@ -178,7 +178,7 @@ goto menu
 
 :create_guide
 echo.
-echo ✅ Creating QUICKSTART.md...
+echo    Creating QUICKSTART.md...
 (
 echo # Local LLM NPC - Quick Start Guide
 echo.
@@ -312,8 +312,8 @@ echo.
 echo **Your project is now ready for professional video recording!**
 ) > QUICKSTART.md
 
-echo ✅ QUICKSTART.md created with complete demo script!
-echo 📖 Check the file for detailed 3-minute video guide
+echo    QUICKSTART.md created with complete demo script!
+echo      Check the file for detailed 3-minute video guide
 echo.
 pause
 goto menu
@@ -341,7 +341,7 @@ echo 3. Show AI response with practical advice
 echo 4. Demonstrate automatic cross-referral to Dr. Flora Verde
 echo 5. Show collaborative AI response
 echo.
-echo 💬 SAY: "Each professor has decades of simulated expertise and automatically"
+echo        SAY: "Each professor has decades of simulated expertise and automatically"
 echo "collaborates with other specialists for comprehensive answers."
 echo.
 echo ⏱️ 1:30-2:15 - ASSESSMENT SYSTEM
@@ -351,7 +351,7 @@ echo 3. Show multiple choice and calculation questions
 echo 4. Display real-time progress and adaptive difficulty
 echo 5. Show detailed results with recommendations
 echo.
-echo 💬 SAY: "The adaptive assessment system adjusts difficulty in real-time"
+echo        SAY: "The adaptive assessment system adjusts difficulty in real-time"
 echo "and provides comprehensive performance analytics."
 echo.
 echo ⏱️ 2:15-2:45 - ANALYTICS DASHBOARD
@@ -360,7 +360,7 @@ echo 2. Show learning progress across 7 specialties
 echo 3. Display interaction patterns and competency tracking
 echo 4. Demonstrate personalized AI recommendations
 echo.
-echo 💬 SAY: "Advanced analytics track your complete learning journey with"
+echo        SAY: "Advanced analytics track your complete learning journey with"
 echo "AI-powered recommendations for optimal educational outcomes."
 echo.
 echo ⏱️ 2:45-3:00 - CONCLUSION
@@ -385,12 +385,12 @@ echo ========================
 echo.
 echo This will guide you through the complete setup process.
 echo.
-echo 📋 Current Status:
-if %OLLAMA_INSTALLED%==1 echo ✅ Ollama: Ready
+echo       Current Status:
+if %OLLAMA_INSTALLED%==1 echo    Ollama: Ready
 if %OLLAMA_INSTALLED%==0 echo ❌ Ollama: Needs installation
-if %GODOT_INSTALLED%==1 echo ✅ Godot: Ready  
+if %GODOT_INSTALLED%==1 echo    Godot: Ready  
 if %GODOT_INSTALLED%==0 echo ❌ Godot: Needs installation
-if %DOTNET_INSTALLED%==1 echo ✅ .NET SDK: Ready
+if %DOTNET_INSTALLED%==1 echo    .NET SDK: Ready
 if %DOTNET_INSTALLED%==0 echo ❌ .NET SDK: Needs installation
 echo.
 
@@ -424,7 +424,7 @@ dotnet restore
 dotnet build --configuration Release
 
 echo.
-echo ✅ Setup complete! 
+echo    Setup complete! 
 echo.
 echo 🎮 To run the project:
 echo 1. Use: setup.bat and choose option 4 (run executable)

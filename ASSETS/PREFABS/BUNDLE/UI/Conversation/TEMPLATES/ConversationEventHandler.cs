@@ -78,7 +78,7 @@ public partial class ConversationEventHandler : Node, IConversationEventHandler
         var topicData = data?.topic_name;
         string topic = topicData != null ? topicData.ToString() : "(unknown)";
 
-        GD.Print($"✅ Topic completed: {topic}");
+        GD.Print($"   Topic completed: {topic}");
 
         educationalConversation.AddCompletedTopic(topic);
         educationalConversation.GetProgressTracker()?.MarkTopicCompleted(topic, educationalConversation.Subject.ToString());

@@ -3,19 +3,19 @@
 ## 🎯 **Safe Repository Layout for Upload**
 
 ```
-local-llm-npc/                          # ✅ Can rename repository
-├── 📋 README.md                         # ✅ Can modify/rename
-├── 📖 DOCUMENTATION.md                  # ✅ New comprehensive docs
-├── 🚀 QUICKSTART.md                     # ✅ Quick setup guide
-├── 📄 LICENSE                           # ✅ Can modify
-├── 🔧 setup.bat                         # ✅ Can rename/modify
-├── 🔧 setup.sh                          # ✅ Can rename/modify
-├── 📸 screenshots/                      # ✅ NEW - Add demo images
+local-llm-npc/                          #    Can rename repository
+├──       README.md                         #    Can modify/rename
+├──      DOCUMENTATION.md                  #    New comprehensive docs
+├── 🚀 QUICKSTART.md                     #    Quick setup guide
+├── 📄 LICENSE                           #    Can modify
+├── 🔧 setup.bat                         #    Can rename/modify
+├── 🔧 setup.sh                          #    Can rename/modify
+├── 📸 screenshots/                      #    NEW - Add demo images
 │   ├── main-interface.png
 │   ├── ai-professors.png
 │   ├── assessment-system.png
 │   └── analytics-dashboard.png
-├── 📚 docs/                             # ✅ Can reorganize
+├── 📚 docs/                             #    Can reorganize
 │   ├── user-guide.md
 │   ├── technical-docs.md
 │   ├── deployment-guide.md
@@ -31,12 +31,12 @@ local-llm-npc/                          # ✅ Can rename repository
 ├── 🔴 BIN/                              # ❌ DO NOT CHANGE
 │   ├── WINDOWS/                         # ❌ Keep executables
 │   └── LINUX/                           # ❌ Keep executables
-├── 🟡 .gitignore                        # ✅ Can modify (but be careful)
-├── 🟡 .gitattributes                    # ✅ Can modify
+├── 🟡 .gitignore                        #    Can modify (but be careful)
+├── 🟡 .gitattributes                    #    Can modify
 └── 🟡 export_presets.cfg               # ❌ Keep but can hide in .gitignore
 ```
 
-## ✅ **SAFE CHANGES YOU CAN MAKE:**
+##    **SAFE CHANGES YOU CAN MAKE:**
 
 ### 1. **Documentation Reorganization**
 ```bash
@@ -54,17 +54,17 @@ docs/
 ```
 
 ### 2. **Repository Naming Options**
-- `local-llm-npc` ✅ (current)
-- `agricultural-ai-university` ✅
-- `multi-agent-farming-education` ✅
-- `ai-agriculture-platform` ✅
-- `farm-education-ai` ✅
+- `local-llm-npc`    (current)
+- `agricultural-ai-university`   
+- `multi-agent-farming-education`   
+- `ai-agriculture-platform`   
+- `farm-education-ai`   
 
 ### 3. **File Renaming (Safe)**
-- `README.md` → `PROJECT-OVERVIEW.md` ✅
-- `USER_GUIDE.md` → `HOW-TO-USE.md` ✅
-- `setup.bat` → `windows-setup.bat` ✅
-- Add new files like `CONTRIBUTING.md` ✅
+- `README.md` → `PROJECT-OVERVIEW.md`   
+- `USER_GUIDE.md` → `HOW-TO-USE.md`   
+- `setup.bat` → `windows-setup.bat`   
+- Add new files like `CONTRIBUTING.md`   
 
 ### 4. **New Folders You Can Add**
 ```bash
@@ -117,7 +117,7 @@ mv TECHNICAL_DOCUMENTATION.md docs/technical-reference.md
 
 **Created by Om Choksi** | **Built with Godot 4.4.1 + Gemma AI**
 
-[📸 Screenshots] [📖 Documentation] [🚀 Quick Start] [🎬 Demo Video]
+[📸 Screenshots] [     Documentation] [🚀 Quick Start] [🎬 Demo Video]
 
 ## Features
 - 7 specialized AI professors
@@ -156,14 +156,14 @@ obj/
 
 ## 🛡️ **PROTECTION CHECKLIST BEFORE UPLOAD:**
 
-- [ ] ✅ `project.godot` unchanged
-- [ ] ✅ All `.cs` scripts in original locations
-- [ ] ✅ `ASSETS/` structure preserved
-- [ ] ✅ `BIN/` executables included
-- [ ] ✅ `.csproj` files unchanged
-- [ ] ✅ Test project still runs locally
-- [ ] ✅ Added documentation and screenshots
-- [ ] ✅ Created organized docs folder
+- [ ]    `project.godot` unchanged
+- [ ]    All `.cs` scripts in original locations
+- [ ]    `ASSETS/` structure preserved
+- [ ]    `BIN/` executables included
+- [ ]    `.csproj` files unchanged
+- [ ]    Test project still runs locally
+- [ ]    Added documentation and screenshots
+- [ ]    Created organized docs folder
 
 ## 💡 **PRO TIPS:**
 

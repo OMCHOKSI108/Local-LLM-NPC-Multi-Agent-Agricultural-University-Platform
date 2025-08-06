@@ -451,7 +451,7 @@ namespace LllmNpcConversationSystem
                 completedTopicsBySubject[subject].Add(topic);
                 lastTopicTime[topic] = DateTime.Now;
 
-                GD.Print($"✅ Topic mastered: {topic} in {subject}");
+                GD.Print($"   Topic mastered: {topic} in {subject}");
             }
         }
 
