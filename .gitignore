@@ -1,10 +1,14 @@
-# Godot ignores
-.godot/
+# Temporary files
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
 
-# Documentation and extras
-PROJECT_DOCS/
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
 
-# Build outputs
-BIN/
-*.exe
-*.pck
+# System files
+*.log
