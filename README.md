@@ -1,5 +1,6 @@
 # Google Gemma 3n Impact Challenge
 ## AI-Powered Agricultural Education Platform
+LINK OF CHALLANGE : (https://www.kaggle.com/competitions/google-gemma-3n-hackathon)
 
 ### Challenge Overview
 
